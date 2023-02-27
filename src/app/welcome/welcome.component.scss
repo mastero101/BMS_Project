@@ -1,0 +1,27 @@
+.toolbar-item-spacer {
+    flex: 1 1 auto;
+}
+
+.app-container {
+    height: 90%;
+    margin: 0;
+}  
+.app-sidenav {
+    width: 230px;
+}
+.app-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+mat-icon {
+    margin-right: -0.35em;
+    margin-bottom: 0.5em;
+  }
+  
+  mat-icon.Dash {
+    padding-right: 1.4em;
+    margin-top: 0.3em;
+  }

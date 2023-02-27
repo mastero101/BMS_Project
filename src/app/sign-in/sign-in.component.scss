@@ -1,0 +1,13 @@
+div.app-sidenav-content {
+    margin-top: -5em
+}
+
+@media screen and (max-width: 480px) {
+    div.app-sidenav-content {
+        margin-top: -20em
+    }
+}
+
+mat-card {
+    margin-top: 2em;
+}

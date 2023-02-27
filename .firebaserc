@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "bmsproject-bdfba"
+  },
+  "targets": {
+    "bmsproject-bdfba": {
+      "hosting": {
+        "BMS_Project": [
+          "bmsproject-bdfba"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+body {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #999;
+  font-family: Hevletica, sans-serif;
+}
+.gauges-container {
+  display: flex;
+}
+
+div.gauges {
+  @media screen and (max-width: 480px) {
+    margin-top: 55em;
+  }
+  @media screen and (min-width: 480px) {
+    margin-top: 35em;
+    display: flex;
+    margin-right: 2em;
+  }
+}
+
+div.values {
+  @media screen and (min-width: 480px) {
+    margin-top: -34em;
+    max-width: 21.5em;
+    display: flex;
+  }
+}
+
+mat-card {
+  @media screen and (min-width: 480px) {
+    margin-top: 1em;
+    margin-left: 2em;
+    margin-bottom: 35em;
+  }
+}
+
+.gauge-1,.gauge-2,.gauge-3,.gauge-4 {
+  margin-top: 1em;
+}
+
+mat-card.test {
+  @media screen and (max-width: 480px) {
+    margin-top: 1em;
+    font-size: 1.5em;
+  }
+  @media screen and (min-width: 480px) {
+    width: 15em;
+    max-height: 5em;
+    margin-top: 1em;
+    margin-right: 1em;
+    font-size: 1.5em;
+  }
+}

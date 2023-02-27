@@ -1,0 +1,9 @@
+div.app-sidenav-content {
+    margin-top: -5em
+}
+
+@media screen and (max-width: 480px) {
+    div.app-sidenav-content {
+        margin-top: -25em
+    }
+}

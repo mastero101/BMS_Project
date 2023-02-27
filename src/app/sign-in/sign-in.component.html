@@ -1,0 +1,34 @@
+<app-welcome>
+    <div class="app-sidenav-content">
+  <div class="displayTable">
+    <mat-card>
+      <div class="displayTableCell">
+        <div class="authBlock">
+          <h3>Log In</h3>
+          <div class="formGroup">
+            <input type="mail" class="formControl" placeholder="Email" #userName required>
+          </div>
+          <div class="formGroup">
+            <input type="password" class="formControl" placeholder="Password" #userPassword required>
+          </div>
+          <!-- Calling SignIn Api from AuthService -->
+          <div class="formGroup">
+            <button type="button" mat-fab color="primary" style="margin-top: 1em;" class="btn googleBtn" (click)="authService.SignIn(userName.value, userPassword.value)">Enter</button>
+            <button type="button" mat-fab color="warn" style="margin-top: 1em; margin-left: 1em;" class="btn googleBtn" (click)="authService.GoogleAuth()">
+              <i class="fab fa-google-plus-g"></i>
+                Google
+            </button>
+          </div>
+          <div class="forgotPassword" style="margin-top: 1em;">
+            <button routerLink="/forgot-password">Forgot Password</button>
+          </div>
+        </div>
+        <div class="redirectToLogin" style="margin-top: 0.5em;">
+          <button routerLink="/register-user">Registrarse</button>
+        </div>
+        <p style="color:white;">---------------------------------------------------</p>
+      </div>
+    </mat-card>
+    </div>
+  </div>
+  </app-welcome>

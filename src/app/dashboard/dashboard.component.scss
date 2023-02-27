@@ -1,0 +1,35 @@
+div.app-sidenav-content {
+    margin-top: -5em;
+  }
+  
+  @media screen and (max-width: 480px) {
+    div.app-sidenav-content {
+      margin-top: -25em;
+    }
+  }
+  
+  mat-card.header {
+      margin-top: 5em;
+  @media screen and (max-width: 480px) {
+          margin-top: 18em;
+      }
+  }
+  
+  mat-card.profile {
+      @media screen and (max-width: 480px) {
+          margin-top: 1em;
+          margin-bottom: 1em;
+          }
+      }
+  
+  mat-card.log {
+    margin-top: 2em;
+    margin-left: 9em;
+    max-width: 35em;
+    @media screen and (max-width: 480px) {
+      margin-left: 0em;
+      margin-top: 1em;
+      max-width: 25em;
+    }
+  }
+  
