@@ -3,9 +3,6 @@
 #include <Firebase_ESP_Client.h>
 #include <NTPClient.h>
 #include <WiFiUdp.h>
-#include <AsyncTCP.h>
-#include <ESPAsyncWebServer.h>
-#include <AsyncElegantOTA.h>
 
 const int potPin = analogRead(2);
 const int potPin2 = analogRead(15);
@@ -73,14 +70,12 @@ int timestamp;
 unsigned long sendDataPrevMillis = 0;
 unsigned long timerDelay = 300000;
 
+
 // Initialize WiFi
-void initWiFi()
-{
-  WiFi.mode(WIFI_STA);
+void initWiFi() {
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   Serial.print("Connecting to WiFi ..");
-  while (WiFi.status() != WL_CONNECTED)
-  {
+  while (WiFi.status() != WL_CONNECTED) {
     Serial.print('.');
     delay(1000);
   }
@@ -89,27 +84,24 @@ void initWiFi()
 }
 
 // Function that gets current epoch time
-unsigned long getTime()
-{
+unsigned long getTime() {
   timeClient.update();
   unsigned long now = timeClient.getEpochTime();
   return now;
 }
 
-AsyncWebServer server(80);
-
-void setup(void)
+void setup() 
 {
-  pinMode(potPin, INPUT_PULLUP);
-  pinMode(potPin2, INPUT_PULLUP);
-  pinMode(potPin3, INPUT_PULLUP);
-  Serial.begin(115200);
-  delay(10);
+pinMode(potPin, INPUT_PULLUP);
+pinMode(potPin2, INPUT_PULLUP);
+pinMode(potPin3, INPUT_PULLUP);
+Serial.begin(115200);
+delay(10);
 
-  initWiFi();
-  timeClient.begin();
+initWiFi();
+timeClient.begin();
 
-  // Assign the api key (required)
+// Assign the api key (required)
   config.api_key = API_KEY;
 
   // Assign the user sign in credentials
@@ -123,7 +115,7 @@ void setup(void)
   fbdo.setResponseSize(4096);
 
   // Assign the callback function for the long running token generation task */
-  config.token_status_callback = tokenStatusCallback; // see addons/TokenHelper.h
+  config.token_status_callback = tokenStatusCallback; //see addons/TokenHelper.h
 
   // Assign the maximum retry of token generation
   config.max_token_generation_retry = 5;
@@ -133,8 +125,7 @@ void setup(void)
 
   // Getting the user UID might take a few seconds
   Serial.println("Getting User UID");
-  while ((auth.token.uid) == "")
-  {
+  while ((auth.token.uid) == "") {
     Serial.print('.');
     delay(1000);
   }
@@ -145,61 +136,52 @@ void setup(void)
 
   // Update database path
   databasePath = "/UsersData/" + uid + "/readings";
-
-  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send(200, "text/plain", "Hi! I am ESP32."); });
-
-  AsyncElegantOTA.begin(&server); // Start ElegantOTA
-  server.begin();
-  Serial.println("HTTP server started");
 }
 
-void handleRoot()
-{
+void handleRoot() {
+  
 }
 
-void loop()
-{
+void loop() {
 
   int nVoltageRaw = potPin;
   int nVoltageRaw2 = potPin2;
   int nVoltageRaw3 = potPin3;
-  float fVoltage = (float)nVoltageRaw * 0.003065;   // 0.00486 Original
-  float fVoltage2 = (float)nVoltageRaw2 * 0.003065; // 0.00486 Original
-  float fVoltage3 = (float)nVoltageRaw3 * 0.003025; // 0.00486 Original
+  float fVoltage = (float)nVoltageRaw * 0.003065; //0.00486 Original
+  float fVoltage2 = (float)nVoltageRaw2 * 0.003065; //0.00486 Original
+  float fVoltage3 = (float)nVoltageRaw3 * 0.003025; //0.00486 Original
 
   float fVoltageMatrix[22][2] = {
-      {4.15, 100},
-      {4.12, 95},
-      {4.10, 90},
-      {4.05, 85},
-      {4.00, 80},
-      {3.95, 75},
-      {3.90, 70},
-      {3.85, 65},
-      {3.80, 60},
-      {3.75, 55},
-      {3.70, 50},
-      {3.65, 45},
-      {3.60, 40},
-      {3.55, 35},
-      {3.50, 30},
-      {3.45, 25},
-      {3.40, 20},
-      {3.30, 15},
-      {3.20, 10},
-      {3.10, 5},
-      {3.0, 0},
-      {0, 0}};
+    {4.15,  100},
+    {4.12, 95},
+    {4.10, 90},
+    {4.05, 85},
+    {4.00, 80},
+    {3.95, 75},
+    {3.90, 70},
+    {3.85, 65},
+    {3.80, 60},
+    {3.75, 55},
+    {3.70, 50},
+    {3.65, 45},
+    {3.60, 40},
+    {3.55, 35},
+    {3.50, 30},
+    {3.45, 25},
+    {3.40, 20},
+    {3.30, 15},
+    {3.20, 10},
+    {3.10, 5},
+    {3.0, 0},
+    {0, 0}
+  };
 
   int i, perc, perc2;
 
   perc = 100;
 
-  for (i = 3; i >= 0; i--)
-  {
-    if (fVoltageMatrix[i][0] >= fVoltage)
-    {
+  for(i=3; i>=0; i--) {
+    if(fVoltageMatrix[i][0] >= fVoltage) {
       perc = fVoltageMatrix[i + 1][1];
       break;
     }
@@ -207,31 +189,28 @@ void loop()
 
   perc2 = 100;
 
-  for (i = 3; i >= 0; i--)
-  {
-    if (fVoltageMatrix[i][0] >= fVoltage2)
-    {
+  for(i=3; i>=0; i--) {
+    if(fVoltageMatrix[i][0] >= fVoltage2) {
       perc2 = fVoltageMatrix[i + 1][1];
       break;
     }
   }
+ 
+    voltage = fVoltage;
+    voltage2 = fVoltage2;
+    voltage3 = fVoltage3;
+    Percent = perc;
+    Percent2 = perc2;
+    //Relay = strLedPin;
 
-  voltage = fVoltage;
-  voltage2 = fVoltage2;
-  voltage3 = fVoltage3;
-  Percent = perc;
-  Percent2 = perc2;
-  // Relay = strLedPin;
-
-  // Send new readings to database
-  if (Firebase.ready() && (millis() - sendDataPrevMillis > timerDelay || sendDataPrevMillis == 0))
-  {
+        // Send new readings to database
+  if (Firebase.ready() && (millis() - sendDataPrevMillis > timerDelay || sendDataPrevMillis == 0)){
     sendDataPrevMillis = millis();
 
-    // Get current timestamp
+    //Get current timestamp
     timestamp = getTime();
 
-    parentPath = databasePath + "/"; //+ String(timestamp);
+    parentPath = databasePath + "/" ; //+ String(timestamp);
 
     json.set(voltPath.c_str(), String(voltage));
     json.set(voltPath2.c_str(), String(voltage2));
@@ -257,4 +236,4 @@ void loop()
     Serial.println(potPin2);
     Serial.println(potPin3);
   }
-}
+ }
