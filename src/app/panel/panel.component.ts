@@ -42,16 +42,16 @@ export class PanelComponent implements OnInit {
     const db = getDatabase();
     const starCountR = ref(db, '/UsersData/N5GOhtaSNhOkN2eXtA0sMhWss4I2/readings/Voltage');
     onValue(starCountR, (snapshot) => {
-      this.voltage = Number(snapshot.val())-1.27;
+      this.voltage = Number(snapshot.val());
       this.voltagefix = (this.voltage).toFixed(2);
     });
     const starCountRe = ref(db, '/UsersData/N5GOhtaSNhOkN2eXtA0sMhWss4I2/readings/Voltage2');
     onValue(starCountRe, (snapshot) => {
-      this.voltage2 = Number(snapshot.val())+0.04;
+      this.voltage2 = Number(snapshot.val());
     });
     const starCountRef = ref(db, '/UsersData/N5GOhtaSNhOkN2eXtA0sMhWss4I2/readings/Voltage3');
     onValue(starCountRef, (snapshot) => {
-      this.voltage3 = Number(snapshot.val())+0.14;
+      this.voltage3 = Number(snapshot.val());
       this.voltagefix3 = (this.voltage3).toFixed(2);
       this.voltageTotal = (this.voltage+this.voltage2+this.voltage3).toFixed(2);
     });
