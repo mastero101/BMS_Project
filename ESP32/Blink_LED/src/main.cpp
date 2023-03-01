@@ -4,9 +4,9 @@
 #include <NTPClient.h>
 #include <WiFiUdp.h>
 
-const int potPin = analogRead(4);
-const int potPin2 = analogRead(2);
-const int potPin3 = analogRead(15);
+const int potPin = analogRead(2);
+const int potPin2 = analogRead(15);
+const int potPin3 = analogRead(13);
 
 float voltage = 0;
 float voltage2 = 0;
@@ -148,7 +148,7 @@ void loop() {
   int nVoltageRaw = potPin;
   int nVoltageRaw2 = potPin2;
   int nVoltageRaw3 = potPin3;
-  float fVoltage = (float)nVoltageRaw * 0.001985; //0.00486 Original
+  float fVoltage = (float)nVoltageRaw * 0.003065; //0.00486 Original
   float fVoltage2 = (float)nVoltageRaw2 * 0.003065; //0.00486 Original
   float fVoltage3 = (float)nVoltageRaw3 * 0.003025; //0.00486 Original
 

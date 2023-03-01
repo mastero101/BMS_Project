@@ -8,7 +8,7 @@
         [centralLabel]="centralLabel"
         [options]="options"
         [name]="name"
-        [bottomLabel]="this.voltage + ' V' "
+        [bottomLabel]="this.voltagefix + ' V' "
       ></rg-gauge-chart>
     </mat-card>
     <mat-card class="gauge-2">
@@ -28,7 +28,7 @@
         [centralLabel]="centralLabel"
         [options]="options"
         [name]="name3"
-        [bottomLabel]="this.voltage33 + ' V' "
+        [bottomLabel]="this.voltagefix3 + ' V' "
       ></rg-gauge-chart>
     </mat-card>
     <mat-card class="gauge-4">
@@ -44,16 +44,21 @@
   </div>
   <div class="values">
   <mat-card class="test">
-    Voltage: {{voltage}} V
+    Voltage: {{voltagefix}} V
   </mat-card>
   <mat-card class="test">
     Voltage: {{voltage2}} V
   </mat-card>
   <mat-card class="test">
-    Voltage: {{voltage33}} V
+    Voltage: {{voltagefix3}} V
   </mat-card>
   <mat-card class="test" style="margin-bottom: 2em;">
     Voltage Total: {{voltageTotal}} V
+  </mat-card>
+  <mat-card class="test">
+    <button (click)="reload()">
+      Reload
+    </button>
   </mat-card>
   </div>
   </div>
