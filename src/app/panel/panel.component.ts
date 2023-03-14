@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {
   getDatabase,
   ref,
-  update,
-  child,
-  get,
   onValue,
 } from 'firebase/database';
 
 import 'firebase/database';
+
+import axios from 'axios';
 
 @Component({
   selector: 'app-panel',
@@ -22,20 +21,18 @@ export class PanelComponent implements OnInit {
   voltage3: any;
   voltagefix3: any;
   voltageTotal: any;
-  orden: any;
-  tipo: any;
-  nombre: any;
-  fechaC: any;
-  fechaE: any;
-  frase: any;
+  percent: any;
+  percent2: any;
+  date2: any;
 
   constructor() {}
 
-  ngOnInit( ): void {
+  ngOnInit(): void {
     this.voltage = this.getValue();
     this.voltage2 = this.getValue();
     this.voltage3 = this.getValue();
     this.voltageTotal = this.getValue();
+    this.percent = this.getValue();
   }
 
   getValue() {
@@ -55,18 +52,53 @@ export class PanelComponent implements OnInit {
       this.voltagefix3 = (this.voltage3).toFixed(2);
       this.voltageTotal = (this.voltage+this.voltage2+this.voltage3).toFixed(2);
     });
-    //const refs = db.ref('dinosaurs');
-    //  refs.orderByChild('weight').limitToLast(2).on('child_added', (snapshot) => {
-    //    console.log(snapshot.key);
-    //  });
+    const starCountReff = ref(db, '/UsersData/N5GOhtaSNhOkN2eXtA0sMhWss4I2/readings/Percent');
+    onValue(starCountReff, (snapshot) => {
+      this.percent = Number(snapshot.val());
+      this.percent2 = Number(this.percent);
+    });
+    const starCountRefff = ref(db, '/UsersData/N5GOhtaSNhOkN2eXtA0sMhWss4I2/readings/timestamp');
+    onValue(starCountRefff, (snapshot) => {
+      const timestamp = (snapshot.val());
+      const date = new Date(parseInt(timestamp) * 1000); // Multiplica por 1000 para obtener el valor en milisegundos
+      const localTimeZone = new Intl.DateTimeFormat().resolvedOptions().timeZone;
+      this.date2 = date.toLocaleString('es-ES', {year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZone: localTimeZone });
+    });
   }
 
-  updateCompensation(){
-    
-  }
 
   reload() {
     window.location.reload();
+  }
+
+  sms() {
+    const twilioURL = 'https://api.twilio.com/2010-04-01/Accounts/AC100cb9d640b55673e2b655f9d0229498/Messages.json'
+    const messageBody = {
+      Body: this.voltage+'V , '+this.voltage2+'V , '+this.voltage3+'V = '+this.voltageTotal+' V',
+      From: "+12766006674",
+      To: '+529811402316'
+    };
+    axios
+      .post(`${twilioURL}`, new URLSearchParams(messageBody), {
+        auth: {
+          username: 'AC100cb9d640b55673e2b655f9d0229498',
+          password: '73374ad55bbc96d17bed3118da665d35'
+        }
+      })
+      .then(
+        response => {
+          console.log(response);
+        },
+        error => {
+          console.log('error in response', error);
+        }
+      );
+
+    alert('sms');
+  }
+
+  whatsapp(){
+
   }
 
   public canvasWidth = 300;
