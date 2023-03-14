@@ -72,7 +72,7 @@ export class PanelComponent implements OnInit {
   }
 
   sms() {
-    const twilioURL = 'https://api.twilio.com/2010-04-01/Accounts/AC100cb9d640b55673e2b655f9d0229498/Messages.json'
+    const twilioURL = 'https://api.twilio.com/2010-04-01/Accounts/username/Messages.json'
     const messageBody = {
       Body: this.voltage+'V , '+this.voltage2+'V , '+this.voltage3+'V = '+this.voltageTotal+' V',
       From: "+12766006674",
@@ -81,8 +81,8 @@ export class PanelComponent implements OnInit {
     axios
       .post(`${twilioURL}`, new URLSearchParams(messageBody), {
         auth: {
-          username: 'AC100cb9d640b55673e2b655f9d0229498',
-          password: '73374ad55bbc96d17bed3118da665d35'
+          username: '',
+          password: ''
         }
       })
       .then(
