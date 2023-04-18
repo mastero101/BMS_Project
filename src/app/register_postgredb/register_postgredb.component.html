@@ -1,0 +1,52 @@
+<app-welcome>
+  <div class="app-sidenav-content">
+    <mat-card class="input" id="input">
+      <input type="text" placeholder="ID" id="idInit" [(ngModel)]="idInit2">
+      <br>
+      <input type="text" placeholder="Nombre" id="nombre" (keyup)="name()">
+      <br>
+      <input type="text" placeholder="Apellido" id="apellido" (keyup)="apellid()">
+      <br>
+      <input type="text" placeholder="Foto" id="foto" (keyup)="fotos()">
+      <br>
+      <input type="date" class="date" id="date">
+      <br>
+      <br>
+      <button class="send" mat-flat-button (click)="cruds()">Send</button>
+    </mat-card>
+    <br>
+    <br>
+    <mat-card class="del">
+      <input type="text" placeholder="ID Delete" id="id" (keyup)="ids()">
+      <br>
+      <br>
+      <button class="send" mat-flat-button (click)="delete()">Delete</button>
+    </mat-card>
+    <br>
+    <mat-card>
+      <button class="send" style="margin-left: 6.5em;" mat-flat-button (click)="recover2()">Recover All</button>
+      <div class="scroll-container">
+        <div *ngFor="let elemento of elementoRecuperado2">
+          <p>ID: {{ elemento.id }}</p>
+          <p>Nombre: {{ elemento.nombre }}</p>
+          <p>Apellido: {{ elemento.apellido }}</p>
+          <p>Foto: {{ elemento.foto }}</p>
+          <p>-------------------------------</p>
+        </div>
+      </div>
+    </mat-card>
+    <br>
+    <mat-card class="datos">
+      <input type="text" placeholder="ID Recover" id="id2" (keyup)="ids2()">
+      <br>
+      <br>
+      <button class="send" mat-flat-button (click)="recover()">Recover</button>
+      <div *ngIf="elementoRecuperado">
+        <p>ID: {{ elementoRecuperado.id }}</p>
+        <p>Nombre: {{ elementoRecuperado.nombre }}</p>
+        <p>Apellido: {{ elementoRecuperado.apellido }}</p>
+        <p>Foto: {{ elementoRecuperado.foto }}</p>
+      </div>
+    </mat-card>
+  </div>
+</app-welcome>

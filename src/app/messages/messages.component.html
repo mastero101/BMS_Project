@@ -1,0 +1,27 @@
+<app-welcome>
+  <div class="app-sidenav-content">
+
+    <mat-card style="max-height: 6em;">
+      <input type="text2" name="text2" id="text2" placeholder="MSG Text" (keyup)="input2()" (keypress.enter)="sms2()">
+      <button class="sms2" mat-flat (click)="sms2()">Send SMS</button>
+    </mat-card>
+
+    <mat-card style="max-height: 6em;">
+      <input type="text" name="text" id="text" placeholder="MSG Text" (keyup)="input()" (keypress.enter)="whatsapp2()">
+      <button class="whatsapp2" mat-flat (click)="whatsapp2()">Send Whats</button>
+    </mat-card>
+
+    <mat-card class="buttons">
+      <button type="button" mat-fab color="primary" (click)="reload()" style="margin-left: 1em;">
+        Reload
+      </button>
+      <button type="button" mat-fab color="accent" (click)="sms()" style="margin-left: 1em;">
+        SMS
+      </button>
+      <button class="whatsapp" type="button" mat-flat-button (click)="whatsapp()" style="margin-left: 1em;">
+        Whatsapp
+      </button>
+    </mat-card>
+
+  </div>
+</app-welcome>

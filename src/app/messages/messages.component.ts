@@ -10,11 +10,11 @@ import 'firebase/database';
 import axios from 'axios';
 
 @Component({
-  selector: 'app-panel',
-  templateUrl: './panel.component.html',
-  styleUrls: ['./panel.component.scss'],
+  selector: 'app-messages',
+  templateUrl: './messages.component.html',
+  styleUrls: ['./messages.component.scss']
 })
-export class PanelComponent implements OnInit {
+export class MessagesComponent implements OnInit {
   voltage: any;
   voltagefix: any;
   voltage2: any;
@@ -24,8 +24,10 @@ export class PanelComponent implements OnInit {
   percent: any;
   percent2: any;
   date2: any;
+  msgwhats: any;
+  msgsms: any;
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     this.voltage = this.getValue();
@@ -66,7 +68,6 @@ export class PanelComponent implements OnInit {
     });
   }
 
-
   reload() {
     window.location.reload();
   }
@@ -93,8 +94,34 @@ export class PanelComponent implements OnInit {
           console.log('error in response', error);
         }
       );
+  }
 
-    alert('sms');
+  input2(){
+    this.msgsms = (<HTMLInputElement>document.getElementById('text2')).value;
+  }
+
+  sms2(){
+    const twilioURL = 'https://api.twilio.com/2010-04-01/Accounts/AC100cb9d640b55673e2b655f9d0229498/Messages.json'
+    const messageBody = {
+      Body: this.msgsms,
+      From: "+12766006674",
+      To: '+529811402316'
+    };
+    axios
+      .post(`${twilioURL}`, new URLSearchParams(messageBody), {
+        auth: {
+          username: 'AC100cb9d640b55673e2b655f9d0229498',
+          password: '570ef2ec9440fee41fa9ad8bb515e438'
+        }
+      })
+      .then(
+        response => {
+          console.log(response);
+        },
+        error => {
+          console.log('error in response', error);
+        }
+      );
   }
 
   async whatsapp(){
@@ -119,20 +146,26 @@ export class PanelComponent implements OnInit {
     );
   }
 
-  public canvasWidth = 300;
-  public needleValue = 70;
-  public centralLabel = '%';
-  public name = 'Voltage';
-  public name2 = 'Voltage 2';
-  public name3 = 'Voltage 3';
-  name4 = 'Voltage Total'
-  public options = {
-    hasNeedle: true,
-    needleColor: 'gray',
-    needleUpdateSpeed: 1000,
-    arcColors: ['rgb(44, 151, 222)', 'lightgray'],
-    arcDelimiters: [70],
-    rangeLabel: ['0', '100'],
-    needleStartValue: 0,
-  };
+  input(){
+    this.msgwhats = (<HTMLInputElement>document.getElementById('text')).value;
+  }
+
+  async whatsapp2(){
+    const response = await axios.post(
+      'https://api.twilio.com/2010-04-01/Accounts/AC100cb9d640b55673e2b655f9d0229498/Messages.json',
+      new URLSearchParams({
+        'To': 'whatsapp:+5219811402316',
+        'From': 'whatsapp:+14155238886',
+        'Body': 'Your appointment is coming up on July 21 at 3PM'
+                + ' ' + this.msgwhats
+      }),
+      {
+        auth: {
+          username: 'AC100cb9d640b55673e2b655f9d0229498',
+          password: '570ef2ec9440fee41fa9ad8bb515e438'
+        }
+      }
+    );
+  }
+
 }

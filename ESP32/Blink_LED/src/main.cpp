@@ -164,9 +164,9 @@ void loop()
   int nVoltageRaw = potPin;
   int nVoltageRaw2 = potPin2;
   int nVoltageRaw3 = potPin3;
-  float fVoltage = (float)nVoltageRaw * 0.003365;   // 0.00486 Original
-  float fVoltage2 = (float)nVoltageRaw2 * 0.003065; // 0.00486 Original
-  float fVoltage3 = (float)nVoltageRaw3 * 0.002895; // 0.00486 Original
+  float fVoltage = ((float)nVoltageRaw * 3.3) / 1128;   // 0.00486 Original
+  float fVoltage2 = ((float)nVoltageRaw2 * 3.3) / 1088; // 0.00486 Original
+  float fVoltage3 = ((float)nVoltageRaw3 * 3.3) / 1088; // 0.00486 Original
 
   float fVoltageMatrix[22][2] = {
       {4.15, 100},

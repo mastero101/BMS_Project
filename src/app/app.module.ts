@@ -43,17 +43,21 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { PanelComponent } from './panel/panel.component';
 import { GaugeChartModule } from 'angular-gauge-chart';
+import { MessagesComponent } from './messages/messages.component';
+import { Register_postgredbComponent } from './register_postgredb/register_postgredb.component';
 
 
 @NgModule({
-  declarations: [
+  declarations: [		
     AppComponent,
     WelcomeComponent,
     SignInComponent,
     DashboardComponent,
     SignUpComponent,
     PanelComponent,
-  ],
+    MessagesComponent,
+      Register_postgredbComponent
+   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,

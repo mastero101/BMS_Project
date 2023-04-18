@@ -1,0 +1,44 @@
+input {
+    width: 18em;
+    margin-top: 2em;
+    margin-left: 1.5em;
+    padding-top: 0.2em;
+    text-align: center;
+}
+
+input.date {
+    width: 10em;
+    margin-left: 5.2em;
+}
+
+button.send {
+    margin-left: 7.5em;
+    background: purple;
+    color: white;
+}
+
+mat-card.input {
+    margin-top: 5em;
+    height: 20em;
+    width: 20em;
+}
+
+mat-card.del {
+    height: 5em;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 1em;
+    padding: 1em;
+  }
+  
+  .mat-card {
+    max-height: 400px;
+  }
+  
+  .scroll-container {
+    max-height: 300px;
+    overflow-y: auto;
+  }

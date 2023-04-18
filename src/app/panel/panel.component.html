@@ -61,17 +61,19 @@
   <mat-card class="test" style="margin-bottom: 2em;">
     Voltage Total: {{voltageTotal}} V
   </mat-card>
-  <mat-card class="test">
-    <button (click)="reload()">
+
+  <mat-card class="buttons">
+    <button type="button" mat-fab color="primary" (click)="reload()" style="margin-left: 1em;">
       Reload
     </button>
-    <button (click)="sms()" style="margin-left: 1em;">
+    <button type="button" mat-fab color="accent" (click)="sms()" style="margin-left: 1em;">
       SMS
     </button>
-    <button (click)="whatsapp()" style="margin-left: 1em;">
-      whatsapp
+    <button class="whatsapp" type="button" mat-flat-button (click)="whatsapp()" style="margin-left: 1em;">
+      Whatsapp
     </button>
   </mat-card>
+
   </div>
   </div>
 </app-welcome>
