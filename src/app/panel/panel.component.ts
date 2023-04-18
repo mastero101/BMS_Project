@@ -72,7 +72,7 @@ export class PanelComponent implements OnInit {
   }
 
   sms() {
-    const twilioURL = 'https://api.twilio.com/2010-04-01/Accounts/AC100cb9d640b55673e2b655f9d0229498/Messages.json'
+    const twilioURL = 'https://api.twilio.com/2010-04-01/Accounts/username/Messages.json'
     const messageBody = {
       Body: this.voltage+'V , '+this.voltage2+'V , '+this.voltage3+'V = '+this.voltageTotal+' V',
       From: "+12766006674",
@@ -81,8 +81,8 @@ export class PanelComponent implements OnInit {
     axios
       .post(`${twilioURL}`, new URLSearchParams(messageBody), {
         auth: {
-          username: 'AC100cb9d640b55673e2b655f9d0229498',
-          password: '570ef2ec9440fee41fa9ad8bb515e438'
+          username: '',
+          password: ''
         }
       })
       .then(
@@ -99,7 +99,7 @@ export class PanelComponent implements OnInit {
 
   async whatsapp(){
     const response = await axios.post(
-      'https://api.twilio.com/2010-04-01/Accounts/AC100cb9d640b55673e2b655f9d0229498/Messages.json',
+      'https://api.twilio.com/2010-04-01/Accounts//Messages.json',
       new URLSearchParams({
         'To': 'whatsapp:+5219811402316',
         'From': 'whatsapp:+14155238886',
@@ -112,8 +112,8 @@ export class PanelComponent implements OnInit {
       }),
       {
         auth: {
-          username: 'AC100cb9d640b55673e2b655f9d0229498',
-          password: '570ef2ec9440fee41fa9ad8bb515e438'
+          username: '',
+          password: ''
         }
       }
     );
