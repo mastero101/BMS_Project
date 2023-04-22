@@ -1,0 +1,53 @@
+<app-welcome>
+    <div class="app-sidenav-content">
+      <mat-card class="input" id="input">
+        <input type="text" placeholder="ID" id="idInit" [(ngModel)]="idInit2">
+        <br>
+        <input type="text" placeholder="Modelo" id="modelo" (keyup)="modelos()">
+        <br>
+        <input type="text" placeholder="Precio" id="precio" (keyup)="precios()">
+        <br>
+        <input type="text" placeholder="Tienda" id="tienda" (keyup)="tiendas()">
+        <br>
+        <input type="date" class="date" id="date">
+        <br>
+        <br>
+        <button class="send" mat-flat-button (click)="cruds()">Send</button>
+      </mat-card>
+      <br>
+      <br>
+      <mat-card class="del">
+        <input type="text" placeholder="ID Delete" id="id" (keyup)="ids()">
+        <br>
+        <br>
+        <button class="send" mat-flat-button (click)="delete()">Delete</button>
+      </mat-card>
+      <br>
+      <mat-card>
+        <button class="send" style="margin-left: 6.5em;" mat-flat-button (click)="recover2()">Recover All</button>
+        <div class="scroll-container">
+          <div *ngFor="let elemento of elementoRecuperado2">
+            <p>ID: {{ elemento.id }}</p>
+            <p>Tipo: {{ elemento.tipo }}</p>
+            <p>Modelo: {{ elemento.modelo }}</p>
+            <p>Precio: {{ elemento.precio }}</p>
+            <p>Tienda: {{ elemento.tienda }}</p>
+            <p>-------------------------------</p>
+          </div>
+        </div>
+      </mat-card>
+      <br>
+      <mat-card class="datos">
+        <input type="text" placeholder="ID Recover" id="id2" (keyup)="ids2()">
+        <br>
+        <br>
+        <button class="send" mat-flat-button (click)="recover()">Recover</button>
+        <div *ngIf="elementoRecuperado">
+          <p>ID: {{ elementoRecuperado.id }}</p>
+          <p>Modelo: {{ elementoRecuperado.modelo }}</p>
+          <p>Precio: {{ elementoRecuperado.precio }}</p>
+          <p>Tienda: {{ elementoRecuperado.tienda }}</p>
+        </div>
+      </mat-card>
+    </div>
+  </app-welcome>

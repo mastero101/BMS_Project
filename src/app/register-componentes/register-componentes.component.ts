@@ -2,14 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import axios from 'axios';
 
 @Component({
-  selector: 'app-register_postgredb',
-  templateUrl: './register_postgredb.component.html',
-  styleUrls: ['./register_postgredb.component.scss'],
+  selector: 'app-register-componentes',
+  templateUrl: './register-componentes.component.html',
+  styleUrls: ['./register-componentes.component.scss']
 })
-export class Register_postgredbComponent implements OnInit {
-  nombre: any;
-  apellido: any;
-  foto: any;
+export class RegisterComponentesComponent implements OnInit {
+
+  modelo: any;
+  precio: any;
+  tienda: any;
   id: any;
   id2: any;
   elementoRecuperado: any;
@@ -27,9 +28,10 @@ export class Register_postgredbComponent implements OnInit {
   cruds() {
     axios
       .post('https://nodemysql12.duckdns.org:443/', {
-        nombre: this.nombre,
-        apellido: this.apellido,
-        foto: this.foto,
+        tipo: "procesador",
+        modelo: this.modelo,
+        precio: this.precio,
+        tienda: this.tienda,
       })
       .then(function (response) {
         console.log(response);
@@ -39,21 +41,21 @@ export class Register_postgredbComponent implements OnInit {
       });
   }
 
-  name() {
-    this.nombre = (<HTMLInputElement>document.getElementById('nombre')).value;
-    console.log(this.nombre);
+  modelos() {
+    this.modelo = (<HTMLInputElement>document.getElementById('modelo')).value;
+    console.log(this.modelo);
   }
 
-  apellid() {
-    this.apellido = (<HTMLInputElement>document.getElementById('apellido')).value;
-    console.log(this.apellido);
+  precios() {
+    this.precio = (<HTMLInputElement>document.getElementById('precio')).value;
+    console.log(this.precio);
   }
 
-  fotos() {
-    this.foto = (<HTMLInputElement>(
-      document.getElementById('foto')
+  tiendas() {
+    this.tienda = (<HTMLInputElement>(
+      document.getElementById('tienda')
     )).value;
-    console.log(this.foto);
+    console.log(this.tienda);
   }
 
   ids(){
@@ -119,4 +121,5 @@ export class Register_postgredbComponent implements OnInit {
         console.log(error);
       });
   }
+
 }
