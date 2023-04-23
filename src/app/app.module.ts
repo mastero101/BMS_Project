@@ -46,6 +46,7 @@ import { GaugeChartModule } from 'angular-gauge-chart';
 import { MessagesComponent } from './messages/messages.component';
 import { Register_postgredbComponent } from './register_postgredb/register_postgredb.component';
 import { RegisterComponentesComponent } from './register-componentes/register-componentes.component';
+import { ListComponentsComponent } from './list-components/list-components.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { RegisterComponentesComponent } from './register-componentes/register-co
     PanelComponent,
     MessagesComponent,
       Register_postgredbComponent,
-      RegisterComponentesComponent
+      RegisterComponentesComponent,
+      ListComponentsComponent
    ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

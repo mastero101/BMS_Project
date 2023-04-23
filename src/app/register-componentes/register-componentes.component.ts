@@ -25,23 +25,6 @@ export class RegisterComponentesComponent implements OnInit {
     this.recoverid();
   }
 
-//  cruds() {
-//    axios
-//      .post('https://nodemysql12.duckdns.org:443/', {
-//        tipo: this.selectedOption,
-//        modelo: this.modelo,
-//        precio: this.precio,
-//        tienda: this.tienda,
-//      })
-//      .then(function (response) {
-//        console.log(response);
-//        location.reload();
-//      })
-//     .catch(function (error) {
-//      console.log(error);
-//     });
-//  }
-
   cruds() {
     if (!this.selectedOption || !this.modelo || !this.precio || !this.tienda) {
       console.log("Por favor, complete todos los campos");
