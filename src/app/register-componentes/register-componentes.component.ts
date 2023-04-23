@@ -7,7 +7,7 @@ import axios from 'axios';
   styleUrls: ['./register-componentes.component.scss']
 })
 export class RegisterComponentesComponent implements OnInit {
-
+  selectedOption: string = "";
   modelo: any;
   precio: any;
   tienda: any;
@@ -25,21 +25,46 @@ export class RegisterComponentesComponent implements OnInit {
     this.recoverid();
   }
 
+//  cruds() {
+//    axios
+//      .post('https://nodemysql12.duckdns.org:443/', {
+//        tipo: this.selectedOption,
+//        modelo: this.modelo,
+//        precio: this.precio,
+//        tienda: this.tienda,
+//      })
+//      .then(function (response) {
+//        console.log(response);
+//        location.reload();
+//      })
+//     .catch(function (error) {
+//      console.log(error);
+//     });
+//  }
+
   cruds() {
+    if (!this.selectedOption || !this.modelo || !this.precio || !this.tienda) {
+      console.log("Por favor, complete todos los campos");
+      alert("Por favor, complete todos los campos")
+      return;
+    }
+  
     axios
       .post('https://nodemysql12.duckdns.org:443/', {
-        tipo: "procesador",
+        tipo: this.selectedOption,
         modelo: this.modelo,
         precio: this.precio,
         tienda: this.tienda,
       })
       .then(function (response) {
         console.log(response);
+        location.reload();
       })
       .catch(function (error) {
         console.log(error);
       });
   }
+
 
   modelos() {
     this.modelo = (<HTMLInputElement>document.getElementById('modelo')).value;
@@ -69,6 +94,12 @@ export class RegisterComponentesComponent implements OnInit {
   }
 
   delete() {
+    if (!this.id) {
+      console.log("Por favor, complete el id");
+      alert("Por favor, complete el id")
+      return;
+    }
+
     axios
       .delete(`https://nodemysql12.duckdns.org:443/${this.id}`)
       .then(function (response) {
@@ -80,6 +111,12 @@ export class RegisterComponentesComponent implements OnInit {
   }
 
   recover() {
+    if (!this.id2) {
+      console.log("Por favor, complete el id");
+      alert("Por favor, complete el id")
+      return;
+    }
+
     axios
       .get(`https://nodemysql12.duckdns.org:443/usuarios/${this.id2}`)
       .then(response => {

@@ -18,13 +18,19 @@ button.send {
 }
 
 mat-card.input {
-    margin-top: 5em;
-    height: 20em;
+    margin-top: 6em;
+    height: 22em;
     width: 20em;
 }
 
 mat-card.del {
     height: 5em;
+}
+
+mat-form-field {
+    margin-top: 1em;
+    margin-bottom: -1.5em;
+    margin-left: 3.5em;
 }
 
 .grid-container {

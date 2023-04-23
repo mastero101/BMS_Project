@@ -1,6 +1,20 @@
 <app-welcome>
     <div class="app-sidenav-content">
       <mat-card class="input" id="input">
+        <mat-form-field appearance="fill">
+          <mat-label>Componente</mat-label>
+          <mat-select (selectionChange)="selectedOption = $event.value">
+            <mat-option value="procesador">Procesador</mat-option>
+            <mat-option value="disipador">Disipador</mat-option>
+            <mat-option value="motherboard">Motherboard</mat-option>
+            <mat-option value="ram">Ram</mat-option>
+            <mat-option value="almacenamiento">Almacenamiento</mat-option>
+            <mat-option value="psu">Fuente de Poder</mat-option>
+            <mat-option value="gpu">Grafica</mat-option>
+            <mat-option value="gabinete">Gabinete</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
         <input type="text" placeholder="ID" id="idInit" [(ngModel)]="idInit2">
         <br>
         <input type="text" placeholder="Modelo" id="modelo" (keyup)="modelos()">
@@ -8,8 +22,6 @@
         <input type="text" placeholder="Precio" id="precio" (keyup)="precios()">
         <br>
         <input type="text" placeholder="Tienda" id="tienda" (keyup)="tiendas()">
-        <br>
-        <input type="date" class="date" id="date">
         <br>
         <br>
         <button class="send" mat-flat-button (click)="cruds()">Send</button>

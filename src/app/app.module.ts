@@ -86,6 +86,7 @@ import { RegisterComponentesComponent } from './register-componentes/register-co
     MatCardModule,
     MatDividerModule,
     MatTableModule,
+    MatSelectModule,
     GaugeModule.forRoot(),
     GaugeChartModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
