@@ -5,3 +5,10 @@ mat-card {
 mat-card.first {
     margin-top: 45em;
 }
+
+mat-option.extend {
+    max-height: fit-content;
+    max-width: fit-content;
+    width: fit-content;
+    height: fit-content;
+}

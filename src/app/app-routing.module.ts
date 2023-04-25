@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'register_postgre', component: Register_postgredbComponent, canActivate: [AuthGuard]  },
   { path: 'panel', component: PanelComponent, canActivate: [AuthGuard]},
   { path: 'register_componentes', component: RegisterComponentesComponent, canActivate: [AuthGuard]},
-  { path: 'list_components', component: ListComponentsComponent, canActivate: [AuthGuard]},
+  { path: 'list_components', component: ListComponentsComponent},
   {
     path: 'welcome',
     component: WelcomeComponent,

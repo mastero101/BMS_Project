@@ -21,7 +21,17 @@
         <br>
         <input type="text" placeholder="Precio" id="precio" (keyup)="precios()">
         <br>
-        <input type="text" placeholder="Tienda" id="tienda" (keyup)="tiendas()">
+        <mat-form-field appearance="fill">
+          <mat-label>Tienda</mat-label>
+          <mat-select (selectionChange)="selectedOption2 = $event.value">
+            <mat-option value="Cyberpuerta">Cyberpuerta</mat-option>
+            <mat-option value="DDTECH">DDTECH</mat-option>
+            <mat-option value="Amazon">Amazon</mat-option>
+            <mat-option value="PCEL">PCEL</mat-option>
+            <mat-option value="Dimercom">Dimercom</mat-option>
+            <mat-option value="Zegucom">Zegucom</mat-option>
+          </mat-select>
+        </mat-form-field>
         <br>
         <br>
         <button class="send" mat-flat-button (click)="cruds()">Send</button>
