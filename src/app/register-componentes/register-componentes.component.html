@@ -36,6 +36,18 @@
         <br>
         <button class="send" mat-flat-button (click)="cruds()">Send</button>
       </mat-card>
+      <mat-card class="update" id="update">
+        <input type="text" placeholder="ID" id="idInit" [(ngModel)]="idInit2">
+        <br>
+        <input type="text" placeholder="Modelo" id="modelo" (keyup)="modelos()">
+        <br>
+        <input type="text" placeholder="Precio" id="precio" (keyup)="precios()">
+        <br>
+        <input type="text" placeholder="Tienda" id="tienda">
+        <br>
+        <br>
+        <button class="send" mat-flat-button >Update</button>
+      </mat-card>
       <br>
       <br>
       <mat-card class="del">

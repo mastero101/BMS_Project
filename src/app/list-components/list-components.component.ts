@@ -23,6 +23,14 @@ export class ListComponentsComponent implements OnInit {
   precioSeleccionado6: number = 0;
   precioSeleccionado7: number = 0;
   precioSeleccionado8: number = 0;
+  modeloSeleccionado: any;
+  modeloSeleccionado2: any;
+  modeloSeleccionado3: any;
+  modeloSeleccionado4: any;
+  modeloSeleccionado5: any;
+  modeloSeleccionado6: any;
+  modeloSeleccionado7: any;
+  modeloSeleccionado8: any;
   sumaPrecios: number = 0;
   modelo: any;
   precio: any;
@@ -109,6 +117,7 @@ export class ListComponentsComponent implements OnInit {
   setPrecioSeleccionado(procesadorSeleccionado: any) {
     if (procesadorSeleccionado) {
       this.precioSeleccionado = procesadorSeleccionado.precio;
+      this.modeloSeleccionado = procesadorSeleccionado.modelo;
       this.sumatoriaPrecios();
     } else {
       this.precioSeleccionado = 0;
@@ -138,6 +147,7 @@ export class ListComponentsComponent implements OnInit {
     );
     if (motherboardSeleccionada) {
       this.precioSeleccionado2 = motherboardSeleccionada.precio;
+      this.modeloSeleccionado2 = motherboardSeleccionada.modelo;
     }
     this.sumatoriaPrecios();
   }
@@ -163,6 +173,7 @@ export class ListComponentsComponent implements OnInit {
     const ramSeleccionada = this.ram.find((item) => item.modelo === modelo);
     if (ramSeleccionada) {
       this.precioSeleccionado3 = ramSeleccionada.precio;
+      this.modeloSeleccionado3 = ramSeleccionada.modelo;
     }
     this.sumatoriaPrecios();
   }
@@ -190,6 +201,7 @@ export class ListComponentsComponent implements OnInit {
     );
     if (almacenamientoSeleccionado) {
       this.precioSeleccionado4 = almacenamientoSeleccionado.precio;
+      this.modeloSeleccionado4 = almacenamientoSeleccionado.modelo;
     }
     this.sumatoriaPrecios();
   }
@@ -217,6 +229,7 @@ export class ListComponentsComponent implements OnInit {
     );
     if (disipadorSeleccionado) {
       this.precioSeleccionado5 = disipadorSeleccionado.precio;
+      this.modeloSeleccionado5 = disipadorSeleccionado.modelo;
     }
     this.sumatoriaPrecios();
   }
@@ -244,6 +257,7 @@ export class ListComponentsComponent implements OnInit {
     );
     if (fuenteSeleccionado) {
       this.precioSeleccionado6 = fuenteSeleccionado.precio;
+      this.modeloSeleccionado6 =  fuenteSeleccionado.modelo;
     }
     this.sumatoriaPrecios();
   }
@@ -271,6 +285,7 @@ export class ListComponentsComponent implements OnInit {
     );
     if (graficaSeleccionado) {
       this.precioSeleccionado7 = graficaSeleccionado.precio;
+      this.modeloSeleccionado7 = graficaSeleccionado.modelo;
     }
     this.sumatoriaPrecios();
   }
@@ -298,6 +313,7 @@ export class ListComponentsComponent implements OnInit {
     );
     if (gabineteSeleccionado) {
       this.precioSeleccionado8 = gabineteSeleccionado.precio;
+      this.modeloSeleccionado8 = gabineteSeleccionado.modelo;
     }
     this.sumatoriaPrecios();
   }
@@ -313,5 +329,24 @@ export class ListComponentsComponent implements OnInit {
       this.precioSeleccionado7 +
       this.precioSeleccionado8;
     console.log(this.sumaPrecios);
+  }
+
+  exportToText() {
+    const text = `Procesador: ${this.modeloSeleccionado}, $${this.precioSeleccionado}`;
+    const text2 = `Placa Madre: ${this.modeloSeleccionado2}, $${this.precioSeleccionado2}`;
+    const text3 = `Ram: ${this.modeloSeleccionado3}, $${this.precioSeleccionado3}`;
+    const text4 = `Almacenamiento: ${this.modeloSeleccionado4}, $${this.precioSeleccionado4}`;
+    const text5 = `Enfriamiento: ${this.modeloSeleccionado5}, $${this.precioSeleccionado5}`;
+    const text6 = `Fuente: ${this.modeloSeleccionado6}, $${this.precioSeleccionado6}`;
+    const text7 = `Grafica: ${this.modeloSeleccionado7}, $${this.precioSeleccionado7}`;
+    const text8 = `Gabinete: ${this.modeloSeleccionado8}, $${this.precioSeleccionado8}`;
+    const allText = [text, text2, text3, text4, text5, text6, text7, text8].join('\n');
+    const element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(allText));
+    element.setAttribute('download', 'armado.txt');
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
   }
 }
