@@ -152,7 +152,7 @@ export class PanelComponent implements OnInit {
         const date3 = new Date(parseInt(timestamp2) * 1000); // Multiplica por 1000 para obtener el valor en milisegundos
         const localTimeZone2 = new Intl.DateTimeFormat().resolvedOptions().timeZone;
         this.date4 = date3.toLocaleString('es-ES', {year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZone: localTimeZone2 });
-        console.log(response);
+        console.log(response.data);
         console.log(this.date4);
       })
       .catch((error) => {
