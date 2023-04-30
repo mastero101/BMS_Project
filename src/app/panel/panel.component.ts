@@ -23,9 +23,11 @@ export class PanelComponent implements OnInit {
   voltageTotal: any;
   percent: any;
   percent2: any;
-  date2: any;
   energy: any;
   watts: any;
+  date2: any;
+  date3: any;
+  date4: any;
 
   constructor() {}
 
@@ -146,14 +148,15 @@ export class PanelComponent implements OnInit {
       .then((response) => {
         this.recoverWatts = response.data;
         this.watts = response.data[response.data.length - 1].watts;
-        const timestamp2 = response.data.time;
-        const date2 = new Date(parseInt(timestamp2) * 1000); // Multiplica por 1000 para obtener el valor en milisegundos
+        const timestamp2 = response.data[response.data.length - 1].time;
+        const date3 = new Date(parseInt(timestamp2) * 1000); // Multiplica por 1000 para obtener el valor en milisegundos
         const localTimeZone2 = new Intl.DateTimeFormat().resolvedOptions().timeZone;
-        this.date2 = date2.toLocaleString('es-ES', {year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZone: localTimeZone2 });
+        this.date4 = date3.toLocaleString('es-ES', {year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZone: localTimeZone2 });
         console.log(response);
+        console.log(this.date4);
       })
       .catch((error) => {
-        console.log(error);
+        console.log();
       });
   }
 }
