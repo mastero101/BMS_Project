@@ -24,6 +24,8 @@ export class PanelComponent implements OnInit {
   percent: any;
   percent2: any;
   date2: any;
+  energy: any;
+  watts: any;
 
   constructor() {}
 
@@ -33,6 +35,7 @@ export class PanelComponent implements OnInit {
     this.voltage3 = this.getValue();
     this.voltageTotal = this.getValue();
     this.percent = this.getValue();
+    this.watts = this.recoverWatts();
   }
 
   getValue() {
@@ -135,4 +138,21 @@ export class PanelComponent implements OnInit {
     rangeLabel: ['0', '100'],
     needleStartValue: 0,
   };
+
+  recoverWatts() {
+    axios
+      .get('http://132.145.206.61:3000/data')
+      .then((response) => {
+        this.recoverWatts = response.data;
+        this.watts = response.data[response.data.length - 1].watts;
+        const timestamp2 = response.data.time;
+        const date2 = new Date(parseInt(timestamp2) * 1000); // Multiplica por 1000 para obtener el valor en milisegundos
+        const localTimeZone2 = new Intl.DateTimeFormat().resolvedOptions().timeZone;
+        this.date2 = date2.toLocaleString('es-ES', {year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZone: localTimeZone2 });
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 }

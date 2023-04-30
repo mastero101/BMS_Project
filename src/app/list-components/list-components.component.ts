@@ -340,7 +340,8 @@ export class ListComponentsComponent implements OnInit {
     const text6 = `Fuente: ${this.modeloSeleccionado6}, $${this.precioSeleccionado6}`;
     const text7 = `Grafica: ${this.modeloSeleccionado7}, $${this.precioSeleccionado7}`;
     const text8 = `Gabinete: ${this.modeloSeleccionado8}, $${this.precioSeleccionado8}`;
-    const allText = [text, text2, text3, text4, text5, text6, text7, text8].join('\n');
+    const text9 = `Total: $${this.sumaPrecios}`
+    const allText = [text, text2, text3, text4, text5, text6, text7, text8, text9].join('\n');
     const element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(allText));
     element.setAttribute('download', 'armado.txt');
