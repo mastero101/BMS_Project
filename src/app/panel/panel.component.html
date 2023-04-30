@@ -44,6 +44,16 @@
         [bottomLabel]="this.voltageTotal + ' V' "
       ></rg-gauge-chart>
     </mat-card>
+    <mat-card class="gauge-5">
+      <rg-gauge-chart style="font-size:1.8em;"
+        [canvasWidth]="canvasWidth"
+        [needleValue]="needleValue"
+        [centralLabel]="centralLabel"
+        [options]="options"
+        [name]="name5"
+        [bottomLabel]="this.watts + ' W' "
+      ></rg-gauge-chart>
+    </mat-card>
   </div>
   <div class="values">
   <mat-card class="test">
@@ -62,7 +72,7 @@
     Voltage Total: {{voltageTotal}} V
   </mat-card>
 
-  <mat-card class="test" style="margin-bottom: 2em;">
+  <mat-card class="test" style="margin-bottom: 0em; margin-top: -1em;">
    <p>
      Watts Total: {{watts}} W
    </p> 

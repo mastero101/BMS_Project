@@ -128,7 +128,8 @@ export class PanelComponent implements OnInit {
   public name = 'Voltage';
   public name2 = 'Voltage 2';
   public name3 = 'Voltage 3';
-  name4 = 'Voltage Total'
+  public name4 = 'Voltage Total'
+  public name5 = 'Watts';
   public options = {
     hasNeedle: true,
     needleColor: 'gray',
