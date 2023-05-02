@@ -35,7 +35,7 @@ export class MonitorComponent implements OnInit {
 
   public canvasWidth = 300;
   public needleValue = 70;
-  public centralLabel = '%';
+  public centralLabel = 'W';
   public name = 'Voltage';
   public name2 = 'Voltage 2';
   public name3 = 'Voltage 3';
