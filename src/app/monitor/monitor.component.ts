@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import axios from 'axios';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-monitor',
   templateUrl: './monitor.component.html',
   styleUrls: ['./monitor.component.scss'],
 })
+
 export class MonitorComponent implements OnInit {
   watts: any;
   date2: any;
@@ -13,10 +16,20 @@ export class MonitorComponent implements OnInit {
   kw: any;
   ampers: any;
   vrms: any;
+  update: any;
+  date3: any;
+  wattsAll: any;
+  kwAll: any;
+  ampersAll: any;
+  vrmsAll: any;
+  public data: any[] = [];
 
   constructor() {}
+  
+  @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
   ngOnInit(): void {
+    this.update = this.recoverUpdate();
     this.all = this.recoverAll();
   }
 
@@ -38,7 +51,7 @@ export class MonitorComponent implements OnInit {
     needleStartValue: 0,
   };
 
-  recoverAll() {
+  recoverUpdate() {
     axios
       .get('http://132.145.206.61:3000/data')
       .then((response) => {
@@ -65,5 +78,22 @@ export class MonitorComponent implements OnInit {
       .catch((error) => {
         console.log();
       });
+  }
+
+  recoverAll() {
+    axios
+      .get('http://132.145.206.61:3000/')
+      .then((response) => {
+        this.data = response.data;
+        this.data = response.data.slice(-15);
+        console.log(this.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      const div = document.getElementById('gauges');
+    if (div) {
+      div.style.marginTop = '20em';
+    }
   }
 }

@@ -1,6 +1,6 @@
 <app-welcome>
   <div class="app-sidenav-content">
-    <div class="gauges">
+    <div class="gauges" id="gauges">
       <mat-card class="date">
         {{ date2 }}
       </mat-card>
@@ -30,6 +30,26 @@
       <p>
         {{kw}} KWhr
       </p>
+    </mat-card>
+    <mat-card class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>KWhr</th>
+            <th>Amps</th>
+            <th>Watts</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of data">
+            <td>{{ item.KWhr }}</td>
+            <td>{{ item.ampers }}</td>
+            <td>{{ item.watts }}</td>
+            <td>{{ item.time }}</td>
+          </tr>
+        </tbody>
+      </table>
     </mat-card>
   </div>
 </app-welcome>
