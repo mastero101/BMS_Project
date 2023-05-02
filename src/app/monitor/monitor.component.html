@@ -1,0 +1,35 @@
+<app-welcome>
+  <div class="app-sidenav-content">
+    <div class="gauges">
+      <mat-card class="date">
+        {{ date2 }}
+      </mat-card>
+      <mat-card class="gauge-1">
+        <rg-gauge-chart
+          style="font-size: 1.8em"
+          [canvasWidth]="canvasWidth"
+          [needleValue]="needleValue"
+          [centralLabel]="centralLabel"
+          [options]="options"
+          [name]="name"
+          [bottomLabel]="this.watts + ' W'"
+        ></rg-gauge-chart>
+      </mat-card>
+    </div>
+    <mat-card class="data">
+      <p>Watts Total: {{ watts }} W</p>
+      <p>
+        {{date2}}
+      </p>
+      <p>
+        {{ampers}} A
+      </p>
+      <p>
+        {{vrms}} mV
+      </p>
+      <p>
+        {{kw}} KWhr
+      </p>
+    </mat-card>
+  </div>
+</app-welcome>

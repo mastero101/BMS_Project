@@ -12,6 +12,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { Register_postgredbComponent } from './register_postgredb/register_postgredb.component';
 import { RegisterComponentesComponent } from './register-componentes/register-componentes.component';
 import { ListComponentsComponent } from './list-components/list-components.component';
+import { MonitorComponent } from './monitor/monitor.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'panel', component: PanelComponent, canActivate: [AuthGuard]},
   { path: 'register_componentes', component: RegisterComponentesComponent, canActivate: [AuthGuard]},
   { path: 'list_components', component: ListComponentsComponent},
+  { path: 'monitor', component: MonitorComponent},
   {
     path: 'welcome',
     component: WelcomeComponent,

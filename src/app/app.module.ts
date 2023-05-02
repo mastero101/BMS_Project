@@ -47,6 +47,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { Register_postgredbComponent } from './register_postgredb/register_postgredb.component';
 import { RegisterComponentesComponent } from './register-componentes/register-componentes.component';
 import { ListComponentsComponent } from './list-components/list-components.component';
+import { MonitorComponent } from './monitor/monitor.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { ListComponentsComponent } from './list-components/list-components.compo
     MessagesComponent,
       Register_postgredbComponent,
       RegisterComponentesComponent,
-      ListComponentsComponent
+      ListComponentsComponent,
+      MonitorComponent
    ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
