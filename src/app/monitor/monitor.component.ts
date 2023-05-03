@@ -85,21 +85,32 @@ export class MonitorComponent implements OnInit {
   }
 
   recoverAll() {
-    axios
-      .get('http://132.145.206.61:3000/')
-      .then((response) => {
-        this.data = response.data;
-        this.data = response.data.slice(-180);
-        console.log(this.data);
-      })
-      .catch((error) => {
-        console.log(error);
+  axios
+    .get('http://132.145.206.61:3000/')
+    .then((response) => {
+      this.data = response.data;
+      this.data = this.data.slice(-1440).map(item => {
+        // Convertir el timestamp a una fecha/hora legible
+        const date = new Date(item.time*1000);
+        const readableDate = date.toLocaleString();
+        // Devolver un objeto con el nuevo valor de fecha/hora
+        return {
+          KWhr: item.KWhr,
+          ampers: item.ampers,
+          watts: item.watts,
+          time: readableDate
+        };
       });
-      const div = document.getElementById('gauges');
-    if (div) {
-      div.style.marginTop = '25em';
-    }
+      console.log(this.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  const div = document.getElementById('gauges');
+  if (div) {
+    div.style.marginTop = '25em';
   }
+}
 
   get pagedData(): any[] {
     const startIndex = this.pageIndex * this.pageSize;
