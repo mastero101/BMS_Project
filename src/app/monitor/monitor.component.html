@@ -33,6 +33,7 @@
     </mat-card>
     
     <mat-card class="table">
+      <div class="scroll-container">
       <table>
         <thead>
           <tr>
@@ -56,6 +57,7 @@
                      [pageSizeOptions]="[5, 10, 15, 30, 60]"
                      (page)="onPageChange($event)">
       </mat-paginator>
+      </div>
     </mat-card>
 
     <mat-card>

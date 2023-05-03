@@ -109,7 +109,7 @@ export class MonitorComponent implements OnInit {
     });
   const div = document.getElementById('gauges');
   if (div) {
-    div.style.marginTop = '35em';
+    div.style.marginTop = '15em';
   }
 }
 
