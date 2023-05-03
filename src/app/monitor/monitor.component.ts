@@ -3,7 +3,6 @@ import axios from 'axios';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-monitor',
@@ -26,7 +25,7 @@ export class MonitorComponent implements OnInit {
   vrmsAll: any;
   data: any[] = []; // Aquí se almacenarán los datos recuperados de la API
   pageSize = 15; // El número de elementos a mostrar por página
-  pageSizeOptions: number[] = [5, 10, 15, 30, 60]; // Opciones de selección de tamaño de página
+  pageSizeOptions: number[] = [5, 10, 15, 30]; // Opciones de selección de tamaño de página
   pageIndex = 0; // El índice de la página actual
 
   constructor() {}
@@ -109,7 +108,7 @@ export class MonitorComponent implements OnInit {
     });
   const div = document.getElementById('gauges');
   if (div) {
-    div.style.marginTop = '15em';
+    div.style.marginTop = '35em';
   }
 }
 
@@ -118,7 +117,7 @@ export class MonitorComponent implements OnInit {
     return this.data.slice(startIndex, startIndex + this.pageSize);
   }
 
-  onPageChange(event: PageEvent) {
-    this.pageSize = event.pageSize;
+  onPageChange(event: any) {
+    this.pageIndex = event.pageIndex;
   }
 }
