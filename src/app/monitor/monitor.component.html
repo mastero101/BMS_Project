@@ -53,7 +53,7 @@
       </table>
       <mat-paginator [length]="data.length"
                      [pageSize]="pageSize"
-                     [pageSizeOptions]="pageSizeOptions"
+                     [pageSizeOptions]="[5, 10, 15, 30, 60]"
                      (page)="onPageChange($event)">
       </mat-paginator>
     </mat-card>
