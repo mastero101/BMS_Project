@@ -31,6 +31,7 @@
         {{kw}} KWhr
       </p>
     </mat-card>
+    
     <mat-card class="table">
       <table>
         <thead>
@@ -38,11 +39,11 @@
             <th>KWhr</th>
             <th>Amps</th>
             <th>Watts</th>
-            <th>Time</th>
+            <th class="time">Time</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of data">
+          <tr *ngFor="let item of pagedData">
             <td>{{ item.KWhr }}</td>
             <td>{{ item.ampers }}</td>
             <td>{{ item.watts }}</td>
@@ -50,6 +51,12 @@
           </tr>
         </tbody>
       </table>
+      <mat-paginator [length]="data.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)"></mat-paginator>
     </mat-card>
+
+    <mat-card>
+      
+    </mat-card>
+
   </div>
 </app-welcome>

@@ -1,8 +1,20 @@
 mat-card.date {
-    margin-bottom: 1.5em;
+    margin-bottom: 0em;
 }
 
 mat-card.data {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
+}
+
+table {
+    width: 120%;
+ }
+
+th {
+    padding-right: 10%;
+}
+
+th.time {
+    padding-right: 20%;
 }

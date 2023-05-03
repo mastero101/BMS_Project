@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import axios from 'axios';
-import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-monitor',
@@ -22,7 +23,10 @@ export class MonitorComponent implements OnInit {
   kwAll: any;
   ampersAll: any;
   vrmsAll: any;
-  public data: any[] = [];
+  data: any[] = []; // Aquí se almacenarán los datos recuperados de la API
+  pageSize = 15; // El número de elementos a mostrar por página
+  pageSizeOptions: number[] = [5, 10, 15, 20]; // Opciones de selección de tamaño de página
+  pageIndex = 0; // El índice de la página actual
 
   constructor() {}
   
@@ -85,7 +89,7 @@ export class MonitorComponent implements OnInit {
       .get('http://132.145.206.61:3000/')
       .then((response) => {
         this.data = response.data;
-        this.data = response.data.slice(-15);
+        this.data = response.data.slice(-180);
         console.log(this.data);
       })
       .catch((error) => {
@@ -95,5 +99,14 @@ export class MonitorComponent implements OnInit {
     if (div) {
       div.style.marginTop = '25em';
     }
+  }
+
+  get pagedData(): any[] {
+    const startIndex = this.pageIndex * this.pageSize;
+    return this.data.slice(startIndex, startIndex + this.pageSize);
+  }
+
+  onPageChange(event: any) {
+    this.pageIndex = event.pageIndex;
   }
 }

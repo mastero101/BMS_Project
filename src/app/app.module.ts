@@ -35,6 +35,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { GaugeModule } from 'angular-gauge';
 
@@ -91,6 +92,7 @@ import { MonitorComponent } from './monitor/monitor.component';
     MatDividerModule,
     MatTableModule,
     MatSelectModule,
+    MatPaginatorModule,
     GaugeModule.forRoot(),
     GaugeChartModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
