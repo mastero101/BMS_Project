@@ -27,6 +27,7 @@ export class MonitorComponent implements OnInit {
   pageSize = 15; // El número de elementos a mostrar por página
   pageSizeOptions: number[] = [5, 10, 15, 30]; // Opciones de selección de tamaño de página
   pageIndex = 0; // El índice de la página actual
+  kwhr: any;
 
   constructor() {}
   
@@ -35,6 +36,7 @@ export class MonitorComponent implements OnInit {
   ngOnInit(): void {
     this.update = this.recoverUpdate();
     this.all = this.recoverAll();
+    this.kwhr = this.recoverKwhr();
   }
 
   public canvasWidth = 300;
@@ -110,7 +112,19 @@ export class MonitorComponent implements OnInit {
   if (div) {
     div.style.marginTop = '35em';
   }
-}
+  }
+
+  recoverKwhr() {
+    axios
+      .get('http://132.145.206.61:3000/kwhr')
+      .then((response) => {
+        this.kwhr = (response.data[response.data.length - 1].KWhrAcumulado).toFixed(3);
+        console.log(this.kwhr);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
 
   get pagedData(): any[] {
     const startIndex = this.pageIndex * this.pageSize;
