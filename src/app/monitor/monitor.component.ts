@@ -25,7 +25,7 @@ export class MonitorComponent implements OnInit {
   vrmsAll: any;
   data: any[] = []; // Aquí se almacenarán los datos recuperados de la API
   pageSize = 15; // El número de elementos a mostrar por página
-  pageSizeOptions: number[] = [5, 10, 15, 20]; // Opciones de selección de tamaño de página
+  pageSizeOptions: number[] = [5, 10, 15, 30]; // Opciones de selección de tamaño de página
   pageIndex = 0; // El índice de la página actual
 
   constructor() {}
