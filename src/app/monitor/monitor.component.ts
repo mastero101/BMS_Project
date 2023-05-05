@@ -1,15 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import axios from 'axios';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import Chart from 'chart.js/auto';
 
 @Component({
   selector: 'app-monitor',
   templateUrl: './monitor.component.html',
   styleUrls: ['./monitor.component.scss'],
 })
-
 export class MonitorComponent implements OnInit {
   watts: any;
   date2: any;
@@ -28,15 +26,17 @@ export class MonitorComponent implements OnInit {
   pageSizeOptions: number[] = [15, 30, 60, 120];
   pageIndex = 0;
   kwhr: any;
+  public chart: any;
 
   constructor() {}
-  
+
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
   ngOnInit(): void {
     this.update = this.recoverUpdate();
     this.all = this.recoverAll();
     this.kwhr = this.recoverKwhr();
+    this.createChart();
   }
 
   public canvasWidth = 300;
@@ -87,48 +87,65 @@ export class MonitorComponent implements OnInit {
   }
 
   recoverAll() {
-  axios
-    .get('http://132.145.206.61:3000/')
-    .then((response) => {
-      this.data = response.data;
-      this.data = this.data.slice(-1440).map(item => {
-        // Convertir el timestamp a una fecha/hora legible
-        const date = new Date(item.time*1000);
-        const readableDate = date.toLocaleString();
-        // Devolver un objeto con el nuevo valor de fecha/hora
-        return {
-          KWhr: item.KWhr,
-          ampers: item.ampers,
-          watts: item.watts,
-          time: readableDate
-        };
-      }).reverse();
-      console.log(this.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  const div = document.getElementById('gauges');
-  if (div) {
-    div.style.marginTop = '35em';
-  }
+    axios
+      .get('http://132.145.206.61:3000/')
+      .then((response) => {
+        this.data = response.data;
+        this.data = this.data
+          .slice(-1440)
+          .map((item) => {
+            // Convertir el timestamp a una fecha/hora legible
+            const date = new Date(item.time * 1000);
+            const readableDate = date.toLocaleString();
+            // Devolver un objeto con el nuevo valor de fecha/hora
+            return {
+              KWhr: item.KWhr,
+              ampers: item.ampers,
+              watts: item.watts,
+              time: readableDate,
+            };
+          })
+          .reverse();
+        console.log(this.data);
+        // Actualizar la propiedad 'data' del objeto 'this.chart'
+      const chartData = {
+        labels: this.data.map(item => item.time),
+        datasets: [
+          {
+            label: 'Watts',
+            data: this.data.map(item => item.watts),
+            backgroundColor: 'blue',
+          },
+        ],
+      };
+      this.chart.data = chartData;
+      this.chart.update();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    const div = document.getElementById('gauges');
+    if (div) {
+      div.style.marginTop = '56em';
+    }
   }
 
   recoverKwhr() {
     axios
       .get('http://132.145.206.61:3000/kwhr')
       .then((response) => {
-        this.kwhr = (response.data[response.data.length - 1].KWhrAcumulado).toFixed(3);
+        this.kwhr =
+          response.data[response.data.length - 1].KWhrAcumulado.toFixed(3);
         console.log(this.kwhr);
       })
       .catch((error) => {
         console.log(error);
       });
-    }
+  }
 
   get pagedData(): any[] {
-      const startIndex = this.pageIndex * this.pageSize;
-      return this.data.slice(startIndex, startIndex + this.pageSize);
+    const startIndex = this.pageIndex * this.pageSize;
+    return this.data.slice(startIndex, startIndex + this.pageSize);
   }
 
   onPageChange(event: any) {
@@ -136,5 +153,24 @@ export class MonitorComponent implements OnInit {
     this.pageIndex = event.pageIndex;
     const startIndex = this.pageIndex * this.pageSize;
     const endIndex = startIndex + this.pageSize;
+  }
+
+  createChart() {
+    this.chart = new Chart('MyChart', {
+      type: 'bar',
+      data: {
+        labels: this.data.map((item) => item.time), // reemplazar con los valores de time de los datos recuperados
+        datasets: [
+          {
+            label: 'Watts',
+            data: this.data.map((item) => item.watts), // nueva matriz con los valores de watts de los datos recuperados
+            backgroundColor: 'blue',
+          },
+        ],
+      },
+      options: {
+        aspectRatio: 1,
+      },
+    });
   }
 }
