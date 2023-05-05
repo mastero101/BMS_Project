@@ -8,7 +8,8 @@ mat-card.data {
 }
 
 table {
-    width: 120%;
+    width: 100%;
+    padding-left: 2em;
  }
 
 th {
@@ -17,4 +18,8 @@ th {
 
 th.time {
     padding-right: 20%;
+}
+
+mat-paginator {
+    padding-right: 1em;
 }

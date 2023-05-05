@@ -52,14 +52,10 @@
         </tbody>
       </table>
       <mat-paginator [length]="data.length"
-                     [pageSize]="pageSize"
-                     [pageSizeOptions]="[5, 10, 15, 30, 60]"
+                      [pageSize]="pageSize"
+                     [pageSizeOptions]="[15, 30, 60, 120]"
                      (page)="onPageChange($event)">
       </mat-paginator>
-    </mat-card>
-
-    <mat-card>
-      
     </mat-card>
 
   </div>

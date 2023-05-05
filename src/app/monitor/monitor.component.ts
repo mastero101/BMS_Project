@@ -23,10 +23,10 @@ export class MonitorComponent implements OnInit {
   kwAll: any;
   ampersAll: any;
   vrmsAll: any;
-  data: any[] = []; // Aquí se almacenarán los datos recuperados de la API
-  pageSize = 15; // El número de elementos a mostrar por página
-  pageSizeOptions: number[] = [5, 10, 15, 30]; // Opciones de selección de tamaño de página
-  pageIndex = 0; // El índice de la página actual
+  data: any[] = [];
+  pageSize = 15;
+  pageSizeOptions: number[] = [15, 30, 60, 120];
+  pageIndex = 0;
   kwhr: any;
 
   constructor() {}
@@ -102,7 +102,7 @@ export class MonitorComponent implements OnInit {
           watts: item.watts,
           time: readableDate
         };
-      });
+      }).reverse();
       console.log(this.data);
     })
     .catch((error) => {
@@ -127,11 +127,14 @@ export class MonitorComponent implements OnInit {
     }
 
   get pagedData(): any[] {
-    const startIndex = this.pageIndex * this.pageSize;
-    return this.data.slice(startIndex, startIndex + this.pageSize);
+      const startIndex = this.pageIndex * this.pageSize;
+      return this.data.slice(startIndex, startIndex + this.pageSize);
   }
 
   onPageChange(event: any) {
+    this.pageSize = event.pageSize;
     this.pageIndex = event.pageIndex;
+    const startIndex = this.pageIndex * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
   }
 }
