@@ -5,6 +5,41 @@ mat-card.date {
 mat-card.data {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
+    display: flex; 
+    flex-direction:row; 
+    justify-content:baseline; 
+    align-items: center;
+}
+
+mat-card.card {
+    margin-right:1em;
+    max-width: fit-content;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items:center;
+}
+
+mat-icon.vrms {
+    margin-left: 0.2em;
+    margin-bottom: 0.5em;
+    color: rgb(13, 220, 99);
+}
+
+mat-icon.kw {
+    margin-left: 0.2em;
+    margin-bottom: 0.5em;
+    color: gold;
+}
+
+mat-icon.amp {
+    margin-left: 0em;
+    margin-bottom: 0.5em;
+    color: red;
+}
+
+div.chart {
+    margin-left: 1em;
 }
 
 table {

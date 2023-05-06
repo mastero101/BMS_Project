@@ -5,34 +5,36 @@
         {{ date2 }}
       </mat-card>
       <mat-card class="gauge-1">
-        <rg-gauge-chart
-          style="font-size: 1.8em"
-          [canvasWidth]="canvasWidth"
-          [needleValue]="needleValue"
-          [centralLabel]="centralLabel"
-          [options]="options"
-          [name]="name"
-          [bottomLabel]="this.watts + ' W'"
-        ></rg-gauge-chart>
+        <div class="chart">
+          <rg-gauge-chart
+            style="font-size: 1.8em"
+            [canvasWidth]="canvasWidth"
+            [needleValue]="needleValue"
+            [centralLabel]="centralLabel"
+            [options]="options"
+            [name]="name"
+            [bottomLabel]="this.watts + ' W'"
+          ></rg-gauge-chart>
+        </div>
       </mat-card>
     </div>
+
     <mat-card class="data">
-      <p>Watts Total: {{ watts }} W</p>
-      <p>
-        {{date2}}
-      </p>
-      <p>
-        {{ampers}} A
-      </p>
-      <p>
-        {{vrms}} mV
-      </p>
-      <p>
-        {{this.kwhr}} KWhr
-      </p>
+      <mat-card class="card" style="margin-left: 1em;">
+        <mat-icon class="vrms">flash_on</mat-icon>
+        <p>{{ vrms }} mV</p>
+      </mat-card>
+      <mat-card class="card">
+        <mat-icon class="amp">lightbulb</mat-icon>
+        <p>{{ ampers }} A</p>
+      </mat-card>
+      <mat-card class="card">
+        <mat-icon class="kw">light_mode</mat-icon>
+        <p>{{ this.kwhr }} KWhr</p>
+      </mat-card>
     </mat-card>
-    
-    <mat-card class="table" style="height: 475px; overflow-y: auto;">
+
+    <mat-card class="table" style="height: 475px; overflow-y: auto">
       <table>
         <thead>
           <tr>
@@ -51,18 +53,17 @@
           </tr>
         </tbody>
       </table>
-      <mat-paginator [length]="data.length"
-                      [pageSize]="pageSize"
-                     [pageSizeOptions]="[15, 30, 60, 120]"
-                     (page)="onPageChange($event)">
+      <mat-paginator
+        [length]="data.length"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="[15, 30, 60, 120]"
+        (page)="onPageChange($event)"
+      >
       </mat-paginator>
     </mat-card>
 
     <mat-card>
-
-        <canvas  id="MyChart" >{{ chart }}</canvas>
-
+      <canvas id="MyChart">{{ chart }}</canvas>
     </mat-card>
-    
   </div>
 </app-welcome>

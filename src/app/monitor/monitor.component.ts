@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import axios from 'axios';
 import { MatSort } from '@angular/material/sort';
+import {MatIconModule} from '@angular/material/icon'
 import Chart from 'chart.js/auto';
 
 @Component({
@@ -42,11 +43,7 @@ export class MonitorComponent implements OnInit {
   public canvasWidth = 300;
   public needleValue = 70;
   public centralLabel = 'W';
-  public name = 'Voltage';
-  public name2 = 'Voltage 2';
-  public name3 = 'Voltage 3';
-  public name4 = 'Voltage Total';
-  public name5 = 'Watts';
+  public name = 'Watts';
   public options = {
     hasNeedle: true,
     needleColor: 'gray',
