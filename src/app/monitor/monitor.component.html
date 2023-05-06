@@ -1,19 +1,21 @@
 <app-welcome>
   <div class="app-sidenav-content">
+
     <div class="gauges" id="gauges">
       <mat-card class="date">
         {{ date2 }}
       </mat-card>
+
       <mat-card class="gauge-1">
-        <div class="chart">
+        <div class="chart" *ngIf="watts">
           <rg-gauge-chart
             style="font-size: 1.8em"
             [canvasWidth]="canvasWidth"
-            [needleValue]="needleValue"
+            [needleValue]="watts/5"
             [centralLabel]="centralLabel"
             [options]="options"
             [name]="name"
-            [bottomLabel]="this.watts + ' W'"
+            [bottomLabel]="watts + ' W'"
           ></rg-gauge-chart>
         </div>
       </mat-card>

@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import axios from 'axios';
 import { MatSort } from '@angular/material/sort';
-import {MatIconModule} from '@angular/material/icon'
 import Chart from 'chart.js/auto';
 
 @Component({
@@ -10,7 +9,6 @@ import Chart from 'chart.js/auto';
   styleUrls: ['./monitor.component.scss'],
 })
 export class MonitorComponent implements OnInit {
-  watts: any;
   date2: any;
   all: any;
   kw: any;
@@ -28,6 +26,7 @@ export class MonitorComponent implements OnInit {
   pageIndex = 0;
   kwhr: any;
   public chart: any;
+  public watts = 0;
 
   constructor() {}
 
@@ -38,10 +37,13 @@ export class MonitorComponent implements OnInit {
     this.all = this.recoverAll();
     this.kwhr = this.recoverKwhr();
     this.createChart();
+    setInterval(() => {
+      this.recoverUpdate();
+    }, 5000);
   }
 
   public canvasWidth = 300;
-  public needleValue = 70;
+  public needleValue = 0;
   public centralLabel = 'W';
   public name = 'Watts';
   public options = {
@@ -49,8 +51,8 @@ export class MonitorComponent implements OnInit {
     needleColor: 'gray',
     needleUpdateSpeed: 1000,
     arcColors: ['rgb(44, 151, 222)', 'lightgray'],
-    arcDelimiters: [70],
-    rangeLabel: ['0', '100'],
+    arcDelimiters: [0],
+    rangeLabel: ['0', '500'],
     needleStartValue: 0,
   };
 
@@ -75,8 +77,8 @@ export class MonitorComponent implements OnInit {
           minute: 'numeric',
           timeZone: localTimeZone2,
         });
-        console.log(response.data);
-        console.log(this.date2);
+        // Actualizar el valor de watts
+        this.options.arcDelimiters = [this.watts/5];
       })
       .catch((error) => {
         console.log();
