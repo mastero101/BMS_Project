@@ -36,18 +36,6 @@
         <br>
         <button class="send" mat-flat-button (click)="cruds()">Send</button>
       </mat-card>
-      <mat-card class="update" id="update">
-        <input type="text" placeholder="ID" id="idInit" [(ngModel)]="idInit2">
-        <br>
-        <input type="text" placeholder="Modelo" id="modelo" (keyup)="modelos()">
-        <br>
-        <input type="text" placeholder="Precio" id="precio" (keyup)="precios()">
-        <br>
-        <input type="text" placeholder="Tienda" id="tienda">
-        <br>
-        <br>
-        <button class="send" mat-flat-button >Update</button>
-      </mat-card>
       <br>
       <br>
       <mat-card class="del">
@@ -57,7 +45,7 @@
         <button class="send" mat-flat-button (click)="delete()">Delete</button>
       </mat-card>
       <br>
-      <mat-card>
+      <mat-card class="recover">
         <button class="send" style="margin-left: 6.5em;" mat-flat-button (click)="recover2()">Recover All</button>
         <div class="scroll-container">
           <div *ngFor="let elemento of elementoRecuperado2">
@@ -76,12 +64,14 @@
         <br>
         <br>
         <button class="send" mat-flat-button (click)="recover()">Recover</button>
-        <div *ngIf="elementoRecuperado">
-          <p>ID: {{ elementoRecuperado.id }}</p>
-          <p>Modelo: {{ elementoRecuperado.modelo }}</p>
-          <p>Precio: {{ elementoRecuperado.precio }}</p>
-          <p>Tienda: {{ elementoRecuperado.tienda }}</p>
-        </div>
+        <mat-card *ngIf="elementoRecuperado" style="max-width: 18em;">
+          <input type="text" placeholder="ID: {{elementoRecuperado.id}}" id="" class="a" disabled>
+          <input type="text" placeholder="{{elementoRecuperado.tipo}}" id="" class="a" disabled>
+          <input type="text" placeholder="{{elementoRecuperado.modelo}}" id="" class="a" disabled>
+          <input type="text" placeholder="{{elementoRecuperado.precio}}" id="precioUpdate" class="a" (keyup)="precioUpdate()">
+          <input type="text" placeholder="{{elementoRecuperado.tienda}}" id="" class="a" disabled>
+        </mat-card>
+        <button class="update" mat-flat-button (click)="crudsUpdate()">Update</button>
       </mat-card>
     </div>
   </app-welcome>

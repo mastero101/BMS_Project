@@ -11,24 +11,46 @@ input.date {
     margin-left: 5.2em;
 }
 
+input.a {
+    width: 18em;
+    margin-left: 0.2em;
+}
+
 button.send {
     margin-left: 7.5em;
     background: purple;
     color: white;
 }
 
+button.update {
+    margin-left: 7.7em;
+    margin-top: 1em;
+    background: purple;
+    color: white;
+}
+
 mat-card.input {
-    margin-top: 30em;
+    margin-top: 15em;
     height: 22em;
     width: 20em;
 }
 
 mat-card.update {
     margin-top: 2em;
+    width: 20em;
 }
 
 mat-card.del {
     height: 5em;
+    width: 20em;
+}
+
+mat-card.recover {
+    width: 20em;
+}
+
+mat-card.datos {
+    width: 20em;
 }
 
 mat-form-field {

@@ -11,6 +11,7 @@ export class RegisterComponentesComponent implements OnInit {
   selectedOption2: string = "";
   modelo: any;
   precio: any;
+  precioUpdate: any;
   tienda: any;
   id: any;
   id2: any;
@@ -49,6 +50,29 @@ export class RegisterComponentesComponent implements OnInit {
       });
   }
 
+  crudsUpdate() {
+    if (!this.selectedOption || !this.modelo || !this.precio || !this.selectedOption2) {
+      console.log("Por favor, complete todos los campos");
+      alert("Por favor, complete todos los campos")
+      return;
+    }
+  
+    axios
+      .put('https://nodemysql12.duckdns.org:443/', {
+        tipo: this.selectedOption,
+        modelo: this.modelo,
+        precio: this.precioUpdate,
+        tienda: this.selectedOption2,
+      })
+      .then(function (response) {
+        console.log(response);
+        location.reload();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
 
   modelos() {
     this.modelo = (<HTMLInputElement>document.getElementById('modelo')).value;
@@ -58,6 +82,11 @@ export class RegisterComponentesComponent implements OnInit {
   precios() {
     this.precio = (<HTMLInputElement>document.getElementById('precio')).value;
     console.log(this.precio);
+  }
+
+  preciosUpdate() {
+    this.precioUpdate = (<HTMLInputElement>document.getElementById('precioUpdate')).value;
+    console.log(this.precioUpdate);
   }
 
   tiendas() {
