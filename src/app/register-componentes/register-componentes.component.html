@@ -67,8 +67,8 @@
         <mat-card *ngIf="elementoRecuperado" style="max-width: 18em;">
           <input type="text" placeholder="ID: {{elementoRecuperado.id}}" id="" class="a" disabled>
           <input type="text" placeholder="{{elementoRecuperado.tipo}}" id="" class="a" disabled>
-          <input type="text" placeholder="{{elementoRecuperado.modelo}}" id="" class="a" disabled>
-          <input type="text" placeholder="{{elementoRecuperado.precio}}" id="precioUpdate" class="a" (keyup)="precioUpdate()">
+          <textarea type="text" placeholder="{{elementoRecuperado.modelo}}" id="" class="a" disabled></textarea>
+          <input type="text" placeholder="{{elementoRecuperado.precio}}" id="precioUpdate" class="a" (keyup)="preciosUpdate()">
           <input type="text" placeholder="{{elementoRecuperado.tienda}}" id="" class="a" disabled>
         </mat-card>
         <button class="update" mat-flat-button (click)="crudsUpdate()">Update</button>

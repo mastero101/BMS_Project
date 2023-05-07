@@ -51,18 +51,15 @@ export class RegisterComponentesComponent implements OnInit {
   }
 
   crudsUpdate() {
-    if (!this.selectedOption || !this.modelo || !this.precio || !this.selectedOption2) {
+    if (!this.precioUpdate) {
       console.log("Por favor, complete todos los campos");
       alert("Por favor, complete todos los campos")
       return;
     }
   
     axios
-      .put('https://nodemysql12.duckdns.org:443/', {
-        tipo: this.selectedOption,
-        modelo: this.modelo,
+      .put(`https://nodemysql12.duckdns.org:443/${this.elementoRecuperado.id}`, {
         precio: this.precioUpdate,
-        tienda: this.selectedOption2,
       })
       .then(function (response) {
         console.log(response);
