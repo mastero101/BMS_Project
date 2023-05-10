@@ -11,6 +11,7 @@ export class RegisterComponentesComponent implements OnInit {
   selectedOption2: string = "";
   modelo: any;
   precio: any;
+  url: any;
   precioUpdate: any;
   tienda: any;
   id: any;
@@ -28,7 +29,7 @@ export class RegisterComponentesComponent implements OnInit {
   }
 
   cruds() {
-    if (!this.selectedOption || !this.modelo || !this.precio || !this.selectedOption2) {
+    if (!this.selectedOption || !this.modelo || !this.precio || !this.url || !this.selectedOption2) {
       console.log("Por favor, complete todos los campos");
       alert("Por favor, complete todos los campos")
       return;
@@ -39,6 +40,7 @@ export class RegisterComponentesComponent implements OnInit {
         tipo: this.selectedOption,
         modelo: this.modelo,
         precio: this.precio,
+        url: this.url,
         tienda: this.selectedOption2,
       })
       .then(function (response) {
@@ -79,6 +81,11 @@ export class RegisterComponentesComponent implements OnInit {
   precios() {
     this.precio = (<HTMLInputElement>document.getElementById('precio')).value;
     console.log(this.precio);
+  }
+
+  urls() {
+    this.url = (<HTMLInputElement>document.getElementById('url')).value;
+    console.log(this.url);
   }
 
   preciosUpdate() {
@@ -136,6 +143,10 @@ export class RegisterComponentesComponent implements OnInit {
       .catch(error => {
         console.log(error);
       });
+      const mat_card = document.getElementById('input');
+      if (mat_card) {
+        mat_card.style.marginTop = '30em';
+      }
   }
 
   recover2() {
@@ -150,7 +161,7 @@ export class RegisterComponentesComponent implements OnInit {
       });
     const div = document.getElementById('input');
     if (div) {
-      div.style.marginTop = '27em';
+      div.style.marginTop = '30em';
     }
   }
 
