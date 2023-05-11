@@ -29,7 +29,7 @@ export class RegisterComponentesComponent implements OnInit {
   }
 
   cruds() {
-    if (!this.selectedOption || !this.modelo || !this.precio || !this.url || !this.selectedOption2) {
+    if (!this.selectedOption || !this.modelo || !this.precio || !this.selectedOption2) {
       console.log("Por favor, complete todos los campos");
       alert("Por favor, complete todos los campos")
       return;
