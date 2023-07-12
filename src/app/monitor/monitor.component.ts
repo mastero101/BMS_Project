@@ -87,7 +87,7 @@ export class MonitorComponent implements OnInit {
 
   recoverAll() {
     axios
-      .get('http://132.145.206.61:3000/')
+      .get('http://132.145.206.61:3000/day')
       .then((response) => {
         this.data = response.data;
         this.data = this.data
