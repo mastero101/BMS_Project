@@ -104,7 +104,6 @@ export class MonitorComponent implements OnInit {
               time: readableDate,
             };
           })
-          .reverse();
         console.log(this.data);
         // Actualizar la propiedad 'data' del objeto 'this.chart'
       const chartData = {
