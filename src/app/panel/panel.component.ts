@@ -1,162 +1,188 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  getDatabase,
-  ref,
-  onValue,
-} from 'firebase/database';
-
-import 'firebase/database';
-
-import axios from 'axios';
+import { Component, type OnInit, HostListener } from "@angular/core"
+import { getDatabase, ref, onValue } from "firebase/database"
+import "firebase/database"
+import axios from "axios"
 
 @Component({
-  selector: 'app-panel',
-  templateUrl: './panel.component.html',
-  styleUrls: ['./panel.component.scss'],
+  selector: "app-panel",
+  templateUrl: "./panel.component.html",
+  styleUrls: ["./panel.component.scss"],
 })
+
 export class PanelComponent implements OnInit {
-  voltage: any;
-  voltagefix: any;
-  voltage2: any;
-  voltage3: any;
-  voltagefix3: any;
-  voltageTotal: any;
-  percent: any;
-  percent2: any;
-  energy: any;
-  watts: any;
-  date2: any;
-  date3: any;
-  date4: any;
+  voltage: any
+  voltagefix: any
+  voltage2: any
+  voltage3: any
+  voltagefix3: any
+  voltageTotal: any
+  percent: any
+  percent2: any
+  energy: any
+  watts: any
+  date2: any
+  date3: any
+  date4: any
+
+  @HostListener('window:resize')
+  onResize()
+  {
+    this.canvasWidth = 260
+  }
+
+  public canvasWidth = 260
+  public needleValue = 70
+  public centralLabel = "%"
+  public name = "Voltage"
+  public name2 = "Voltage 2"
+  public name3 = "Voltage 3"
+  public name4 = "Voltage Total"
+  public name5 = "Watts"
+  options = {
+    hasNeedle: true,
+    needleColor: "#757575",
+    needleUpdateSpeed: 1000,
+    arcColors: ["#2196F3", "#E0E0E0"],
+    arcDelimiters: [70],
+    rangeLabel: ["0", "100"],
+    needleStartValue: 0,
+    arcPadding: 0,
+    arcWidth: 15,
+    arcOverEffect: false,
+  }
 
   constructor() {}
 
   ngOnInit(): void {
-    this.voltage = this.getValue();
-    this.voltage2 = this.getValue();
-    this.voltage3 = this.getValue();
-    this.voltageTotal = this.getValue();
-    this.percent = this.getValue();
-    this.watts = this.recoverWatts();
+    this.voltage = this.getValue()
+    this.voltage2 = this.getValue()
+    this.voltage3 = this.getValue()
+    this.voltageTotal = this.getValue()
+    this.percent = this.getValue()
+    this.watts = this.recoverWatts()
   }
 
   getValue() {
-    const db = getDatabase();
-    const starCountR = ref(db, '/UsersData/N5GOhtaSNhOkN2eXtA0sMhWss4I2/readings/Voltage');
+    const db = getDatabase()
+    const starCountR = ref(db, "/UsersData/N5GOhtaSNhOkN2eXtA0sMhWss4I2/readings/Voltage")
     onValue(starCountR, (snapshot) => {
-      this.voltage = Number(snapshot.val());
-      this.voltagefix = (this.voltage).toFixed(2);
-    });
-    const starCountRe = ref(db, '/UsersData/N5GOhtaSNhOkN2eXtA0sMhWss4I2/readings/Voltage2');
+      this.voltage = Number(snapshot.val())
+      this.voltagefix = this.voltage.toFixed(2)
+    })
+    const starCountRe = ref(db, "/UsersData/N5GOhtaSNhOkN2eXtA0sMhWss4I2/readings/Voltage2")
     onValue(starCountRe, (snapshot) => {
-      this.voltage2 = Number(snapshot.val());
-    });
-    const starCountRef = ref(db, '/UsersData/N5GOhtaSNhOkN2eXtA0sMhWss4I2/readings/Voltage3');
+      this.voltage2 = Number(snapshot.val())
+    })
+    const starCountRef = ref(db, "/UsersData/N5GOhtaSNhOkN2eXtA0sMhWss4I2/readings/Voltage3")
     onValue(starCountRef, (snapshot) => {
-      this.voltage3 = Number(snapshot.val());
-      this.voltagefix3 = (this.voltage3).toFixed(2);
-      this.voltageTotal = (this.voltage+this.voltage2+this.voltage3).toFixed(2);
-    });
-    const starCountReff = ref(db, '/UsersData/N5GOhtaSNhOkN2eXtA0sMhWss4I2/readings/Percent');
+      this.voltage3 = Number(snapshot.val())
+      this.voltagefix3 = this.voltage3.toFixed(2)
+      this.voltageTotal = (this.voltage + this.voltage2 + this.voltage3).toFixed(2)
+    })
+    const starCountReff = ref(db, "/UsersData/N5GOhtaSNhOkN2eXtA0sMhWss4I2/readings/Percent")
     onValue(starCountReff, (snapshot) => {
-      this.percent = Number(snapshot.val());
-      this.percent2 = Number(this.percent);
-    });
-    const starCountRefff = ref(db, '/UsersData/N5GOhtaSNhOkN2eXtA0sMhWss4I2/readings/timestamp');
+      this.percent = Number(snapshot.val())
+      this.percent2 = Number(this.percent)
+    })
+    const starCountRefff = ref(db, "/UsersData/N5GOhtaSNhOkN2eXtA0sMhWss4I2/readings/timestamp")
     onValue(starCountRefff, (snapshot) => {
-      const timestamp = (snapshot.val());
-      const date = new Date(parseInt(timestamp) * 1000); // Multiplica por 1000 para obtener el valor en milisegundos
-      const localTimeZone = new Intl.DateTimeFormat().resolvedOptions().timeZone;
-      this.date2 = date.toLocaleString('es-ES', {year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZone: localTimeZone });
-    });
+      const timestamp = snapshot.val()
+      const date = new Date(Number.parseInt(timestamp) * 1000)
+      const localTimeZone = new Intl.DateTimeFormat().resolvedOptions().timeZone
+      this.date2 = date.toLocaleString("es-ES", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        timeZone: localTimeZone,
+      })
+    })
   }
 
-
   reload() {
-    window.location.reload();
+    window.location.reload()
   }
 
   sms() {
-    const twilioURL = 'https://api.twilio.com/2010-04-01/Accounts/username/Messages.json'
+    const twilioURL = "https://api.twilio.com/2010-04-01/Accounts/username/Messages.json"
     const messageBody = {
-      Body: this.voltage+'V , '+this.voltage2+'V , '+this.voltage3+'V = '+this.voltageTotal+' V',
+      Body: this.voltage + "V , " + this.voltage2 + "V , " + this.voltage3 + "V = " + this.voltageTotal + " V",
       From: "+12766006674",
-      To: '+529811402316'
-    };
+      To: "+529811402316",
+    }
     axios
       .post(`${twilioURL}`, new URLSearchParams(messageBody), {
         auth: {
-          username: '',
-          password: ''
-        }
+          username: "",
+          password: "",
+        },
       })
       .then(
-        response => {
-          console.log(response);
+        (response) => {
+          console.log(response)
         },
-        error => {
-          console.log('error in response', error);
-        }
-      );
+        (error) => {
+          console.log("error in response", error)
+        },
+      )
 
-    alert('sms');
+    alert("sms")
   }
 
-  async whatsapp(){
+  async whatsapp() {
     const response = await axios.post(
-      'https://api.twilio.com/2010-04-01/Accounts//Messages.json',
+      "https://api.twilio.com/2010-04-01/Accounts//Messages.json",
       new URLSearchParams({
-        'To': 'whatsapp:+5219811402316',
-        'From': 'whatsapp:+14155238886',
-        'Body': 'Your appointment is coming up on July 21 at 3PM'
-                + ' - ' 
-                + ' ' + this.voltage + ' V'
-                + ' ' + this.voltage2 + ' V' 
-                + ' ' + this.voltage3 + ' V' 
-                + ' ' + this.voltageTotal + ' V'
+        To: "whatsapp:+5219811402316",
+        From: "whatsapp:+14155238886",
+        Body:
+          "Your appointment is coming up on July 21 at 3PM" +
+          " - " +
+          " " +
+          this.voltage +
+          " V" +
+          " " +
+          this.voltage2 +
+          " V" +
+          " " +
+          this.voltage3 +
+          " V" +
+          " " +
+          this.voltageTotal +
+          " V",
       }),
       {
         auth: {
-          username: '',
-          password: ''
-        }
-      }
-    );
+          username: "",
+          password: "",
+        },
+      },
+    )
   }
-
-  public canvasWidth = 300;
-  public needleValue = 70;
-  public centralLabel = '%';
-  public name = 'Voltage';
-  public name2 = 'Voltage 2';
-  public name3 = 'Voltage 3';
-  public name4 = 'Voltage Total'
-  public name5 = 'Watts';
-  public options = {
-    hasNeedle: true,
-    needleColor: 'gray',
-    needleUpdateSpeed: 1000,
-    arcColors: ['rgb(44, 151, 222)', 'lightgray'],
-    arcDelimiters: [70],
-    rangeLabel: ['0', '100'],
-    needleStartValue: 0,
-  };
 
   recoverWatts() {
     axios
-      .get('http://132.145.206.61:3000/data')
+      .get("http://132.145.206.61:3000/data")
       .then((response) => {
-        this.recoverWatts = response.data;
-        this.watts = response.data[response.data.length - 1].watts;
-        const timestamp2 = response.data[response.data.length - 1].time;
-        const date3 = new Date(parseInt(timestamp2) * 1000); // Multiplica por 1000 para obtener el valor en milisegundos
-        const localTimeZone2 = new Intl.DateTimeFormat().resolvedOptions().timeZone;
-        this.date4 = date3.toLocaleString('es-ES', {year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZone: localTimeZone2 });
-        console.log(response.data);
-        console.log(this.date4);
+        this.recoverWatts = response.data
+        this.watts = response.data[response.data.length - 1].watts
+        const timestamp2 = response.data[response.data.length - 1].time
+        const date3 = new Date(Number.parseInt(timestamp2) * 1000)
+        const localTimeZone2 = new Intl.DateTimeFormat().resolvedOptions().timeZone
+        this.date4 = date3.toLocaleString("es-ES", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+          timeZone: localTimeZone2,
+        })
+        console.log(response.data)
+        console.log(this.date4)
       })
       .catch((error) => {
-        console.log();
-      });
+        console.log(error)
+      })
   }
 }
