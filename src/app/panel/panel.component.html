@@ -1,88 +1,49 @@
 <app-welcome>
   <div class="app-sidenav-content">
-    <div class="date-header">
-      <h2>{{date2}}</h2>
-    </div>
-    <div class="gauges">
-      <mat-card>
-        <h3>Voltage</h3>
-        <rg-gauge-chart
-          [canvasWidth]="canvasWidth"
-          [needleValue]="needleValue"
-          [centralLabel]="centralLabel"
-          [options]="options"
-          [bottomLabel]="this.voltagefix + ' V'"
-        ></rg-gauge-chart>
-      </mat-card>
-      <mat-card>
-        <h3>Voltage 2</h3>
-        <rg-gauge-chart
-          [canvasWidth]="canvasWidth"
-          [needleValue]="needleValue"
-          [centralLabel]="centralLabel"
-          [options]="options"
-          [bottomLabel]="this.voltage2 + ' V'"
-        ></rg-gauge-chart>
-      </mat-card>
-      <mat-card>
-        <h3>Voltage 3</h3>
-        <rg-gauge-chart
-          [canvasWidth]="canvasWidth"
-          [needleValue]="needleValue"
-          [centralLabel]="centralLabel"
-          [options]="options"
-          [bottomLabel]="this.voltagefix3 + ' V'"
-        ></rg-gauge-chart>
-      </mat-card>
-      <mat-card>
-        <h3>Voltage Total</h3>
-        <rg-gauge-chart
-          [canvasWidth]="canvasWidth"
-          [needleValue]="needleValue"
-          [centralLabel]="centralLabel"
-          [options]="options"
-          [bottomLabel]="this.voltageTotal + ' V'"
-        ></rg-gauge-chart>
-      </mat-card>
-      <mat-card>
-        <h3>Watts</h3>
-        <rg-gauge-chart
-          [canvasWidth]="canvasWidth"
-          [needleValue]="needleValue"
-          [centralLabel]="centralLabel"
-          [options]="options"
-          [bottomLabel]="this.watts + ' W'"
-        ></rg-gauge-chart>
-      </mat-card>
-    </div>
-
-    <div class="values">
-      <mat-card class="test">
-        <span>Voltage: {{voltagefix}} V</span>
-      </mat-card>
-      <mat-card class="test">
-        <span>Voltage: {{voltage2}} V</span>
-      </mat-card>
-      <mat-card class="test">
-        <span>Voltage: {{voltagefix3}} V</span>
-      </mat-card>
-      <mat-card class="test">
-        <span>Percent: {{percent}} %</span>
-      </mat-card>
-      <mat-card class="test">
-        <span>Voltage Total: {{voltageTotal}} V</span>
-      </mat-card>
-      <mat-card class="test">
-        <span>Watts Total: {{watts}} W</span>
-        <span class="date">{{date4}}</span>
-      </mat-card>
-    </div>
-
-    <div class="buttons">
-      <button mat-fab color="primary" (click)="reload()">
-        <mat-icon>refresh</mat-icon>
-      </button>
+    <div class="app-sidenav-content">
+      <!-- Encabezado con la fecha -->
+      <div class="date-header">
+        <h2>{{ date2 }}</h2>
+      </div>
+    
+      <!-- Sección de gráficos (gauges) -->
+      <div 
+        id="gauges-list"
+        class="gauges" 
+        cdkDropList 
+        [cdkDropListData]="gauges"
+        (cdkDropListDropped)="drop($event)">
+        <mat-card *ngFor="let gauge of gauges" cdkDrag>
+          <h3>{{ gauge.title }}</h3>
+          <rg-gauge-chart
+            [canvasWidth]="canvasWidth"
+            [needleValue]="needleValue"
+            [centralLabel]="centralLabel"
+            [options]="options"
+            [bottomLabel]="gauge.value + ''"
+          ></rg-gauge-chart>
+        </mat-card>
+      </div>
+    
+      <!-- Sección de valores -->
+      <div 
+        id="values-list"
+        class="values" 
+        cdkDropList 
+        [cdkDropListData]="values"
+        (cdkDropListDropped)="drop($event)">
+        <mat-card *ngFor="let value of values" cdkDrag class="test">
+          <span>{{ value.title }}: {{ value.value }} {{ value.unit }}</span>
+          <span *ngIf="value.date" class="date">{{ value.date }}</span>
+        </mat-card>
+      </div>
+    
+      <!-- Botón de recarga -->
+      <div class="buttons">
+        <button mat-fab color="primary" (click)="reload()">
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
 </app-welcome>
-

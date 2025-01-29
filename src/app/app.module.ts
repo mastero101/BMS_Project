@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { DragDropModule } from "@angular/cdk/drag-drop"
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,7 +20,6 @@ import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideStorage,getStorage } from '@angular/fire/storage';
-
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -76,6 +76,7 @@ import { MonitorComponent } from './monitor/monitor.component';
     BrowserAnimationsModule,
     FormsModule,
     BrowserAnimationsModule,
+    DragDropModule,
     MatButtonModule,
     MatSidenavModule,
     MatMenuModule,
