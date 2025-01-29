@@ -11,10 +11,9 @@
     top: 0;
     z-index: 10;
     background-color: #fff;
-    padding: 12px;
     text-align: center;
     border-bottom: 1px solid #f0f0f0;
-    margin-top: 14%;
+    margin-top: 23%;
 
     h2 {
       margin: 0;
@@ -28,7 +27,6 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 16px;
-  padding: 16px;
   justify-items: center;
   width: 100%;
   max-width: 1200px;
@@ -37,7 +35,7 @@
   mat-card {
     width: 100%;
     max-width: 320px;
-    margin: 0;
+    margin: 32px;
     padding: 16px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -60,7 +58,6 @@
 
 .values {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 12px;
   padding: 16px;
   margin-top: 16px;
@@ -122,63 +119,62 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-// Ajustes específicos para móviles pequeños
+// Ajustes específicos para móviles (max-width: 768px)
 @media (max-width: 768px) {
-  .date-header {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background-color: #fff;
-    padding: 12px;
-    text-align: center;
-    border-bottom: 1px solid #f0f0f0;
+  .app-sidenav-content {
+    padding: 0 8px;
+    overflow: visible;
 
-    h2 {
-      margin: 0;
-      font-size: 16px;
-      font-weight: 500;
+    .date-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 8px;
+      margin-top: 0; 
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+      h2 {
+        font-size: 1.1rem;
+        color: #333;
+      }
     }
-  }
 
-  .gauges {
-    grid-template-columns: 1fr;
-    padding: 8px;
-    margin-top: 250%;
-    
-    mat-card {
-      width: 100%;
-      margin-bottom: 16px;
+    .gauges {
+      margin-top: 115%;
+      grid-template-columns: 1fr;
+      gap: 8px; 
+      padding: 0px; 
+
+      mat-card {
+        width: 100%;
+        max-width: 90%;
+        margin: 0;
+        padding: 12px;
+      }
     }
-  }
 
-  .values {
-    display: flex;
-    flex-direction: column;
-    padding: 8px;
+    .values {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding: 0px;
+      margin-top: 8px;
 
-    mat-card {
-      width: 100%;
-      margin-bottom: 16px;
+      .test {
+        padding: 10px;
+        font-size: 0.9rem;
+        margin: 0;
+      }
     }
-  }
 
-  .date-header h2 {
-    font-size: 14px;
-  }
-}
-
-// Ajustes para tablets
-@media (min-width: 401px) and (max-width: 768px) {
-  .gauges {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    padding: 12px;
-  }
-
-  .values {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    padding: 12px;
+    .buttons {
+      position: fixed;
+      bottom: 40px;
+      right: 15px;
+      z-index: 1000;
+      margin: 0; 
+      padding: 0; 
+    }
   }
 }
 
@@ -189,6 +185,6 @@
   }
 
   .values {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(6, 1fr);
   }
 }

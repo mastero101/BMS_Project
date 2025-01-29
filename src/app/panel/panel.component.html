@@ -1,49 +1,54 @@
 <app-welcome>
   <div class="app-sidenav-content">
-    <div class="app-sidenav-content">
-      <!-- Encabezado con la fecha -->
-      <div class="date-header">
-        <h2>{{ date2 }}</h2>
+    <!-- Encabezado fijo -->
+    <div class="date-header">
+      <h2>{{ date2 }}</h2>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="content-wrapper">
+      <!-- Sección de gráficos -->
+      <div class="gauges">
+        <div 
+          id="gauges-list"
+          class="gauges" 
+          cdkDropList 
+          [cdkDropListData]="gauges"
+          (cdkDropListDropped)="drop($event)">
+          <mat-card *ngFor="let gauge of gauges" cdkDrag>
+            <h3>{{ gauge.title }}</h3>
+            <rg-gauge-chart
+              [canvasWidth]="canvasWidth"
+              [needleValue]="needleValue"
+              [centralLabel]="centralLabel"
+              [options]="options"
+              [bottomLabel]="gauge.value + ''"
+            ></rg-gauge-chart>
+          </mat-card>
+        </div>
       </div>
-    
-      <!-- Sección de gráficos (gauges) -->
-      <div 
-        id="gauges-list"
-        class="gauges" 
-        cdkDropList 
-        [cdkDropListData]="gauges"
-        (cdkDropListDropped)="drop($event)">
-        <mat-card *ngFor="let gauge of gauges" cdkDrag>
-          <h3>{{ gauge.title }}</h3>
-          <rg-gauge-chart
-            [canvasWidth]="canvasWidth"
-            [needleValue]="needleValue"
-            [centralLabel]="centralLabel"
-            [options]="options"
-            [bottomLabel]="gauge.value + ''"
-          ></rg-gauge-chart>
-        </mat-card>
-      </div>
-    
+
       <!-- Sección de valores -->
-      <div 
-        id="values-list"
-        class="values" 
-        cdkDropList 
-        [cdkDropListData]="values"
-        (cdkDropListDropped)="drop($event)">
-        <mat-card *ngFor="let value of values" cdkDrag class="test">
-          <span>{{ value.title }}: {{ value.value }} {{ value.unit }}</span>
-          <span *ngIf="value.date" class="date">{{ value.date }}</span>
-        </mat-card>
+      <div class="values">
+        <div 
+          id="values-list"
+          class="values" 
+          cdkDropList 
+          [cdkDropListData]="values"
+          (cdkDropListDropped)="drop($event)">
+          <mat-card *ngFor="let value of values" cdkDrag class="test">
+            <span>{{ value.title }}: {{ value.value }} {{ value.unit }}</span>
+            <span *ngIf="value.date" class="date">{{ value.date }}</span>
+          </mat-card>
+        </div>
       </div>
-    
-      <!-- Botón de recarga -->
-      <div class="buttons">
-        <button mat-fab color="primary" (click)="reload()">
-          <mat-icon>refresh</mat-icon>
-        </button>
-      </div>
+    </div>
+
+    <!-- Botón flotante -->
+    <div class="buttons">
+      <button mat-fab color="primary" (click)="reload()">
+        <mat-icon>refresh</mat-icon>
+      </button>
     </div>
   </div>
 </app-welcome>
